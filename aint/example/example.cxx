@@ -47,35 +47,35 @@ static void fibonacci() {
     T fb =  1; // F_{-1}
     cout << setw(6) << typeidStr<T>();
     for (int j = 0; j <= 100; ++j) {
-	    T fj = fa + fb;
-	    if (j < 7) {
-	    	cout << ", " << setw(3) << fj;
-	    } else if (j % 20 == 0) {
-	    	cout << ", " << setw(j/5 + 1) << fj;
-	    }
-	    fa = fb;
-	    fb = fj;
+        T fj = fa + fb;
+        if (j < 7) {
+            cout << ", " << setw(3) << fj;
+        } else if (j % 20 == 0) {
+            cout << ", " << setw(j/5 + 1) << fj;
+        }
+        fa = fb;
+        fb = fj;
     }
     cout << endl;
 }
 
 int main(int argc, char* argv[]) {
 
-	try {
-	    cout << endl;
-	    cout << "Fibonacci numbers F_j:" << endl;
-	    cout << endl;
-	    cout << "typeid, F_0, F_1, F_2, F_3, F_4, F_5, F_6,  F_20,      F_40,          F_60,              F_80,                 F_100" << endl;
-	    cout << setw(120) << setfill('-') << " " << setfill(' ') << endl;
-		fibonacci<int16_t>();
-		fibonacci<int32_t>();
-		fibonacci<int64_t>();
-		fibonacci<aint>();
-	    cout << endl;
-	}
-	catch(std::string& ex) {
-		cout << "Exception: " << ex << endl;
-	}
+    try {
+        cout << endl;
+        cout << "Fibonacci numbers F_j:" << endl;
+        cout << endl;
+        cout << "typeid, F_0, F_1, F_2, F_3, F_4, F_5, F_6,  F_20,      F_40,          F_60,              F_80,                 F_100" << endl;
+        cout << setw(120) << setfill('-') << " " << setfill(' ') << endl;
+        fibonacci<int16_t>();
+        fibonacci<int32_t>();
+        fibonacci<int64_t>();
+        fibonacci<aint>();
+        cout << endl;
+    }
+    catch(std::string& ex) {
+        cout << "Exception: " << ex << endl;
+    }
     return(0);
 }
 

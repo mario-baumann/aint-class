@@ -28,24 +28,24 @@
 
 void aintTest::testCtor() {
 
-	CPPUNIT_ASSERT( aint("0") == aint(0   ) );
-   	CPPUNIT_ASSERT( aint("0") == aint(0L  ) );
-   	CPPUNIT_ASSERT( aint("0") == aint(0LL ) );
-   	CPPUNIT_ASSERT( aint("0") == aint(0U  ) );
-   	CPPUNIT_ASSERT( aint("0") == aint(0UL ) );
-   	CPPUNIT_ASSERT( aint("0") == aint(0ULL) );
+    CPPUNIT_ASSERT( aint("0") == aint(0   ) );
+    CPPUNIT_ASSERT( aint("0") == aint(0L  ) );
+    CPPUNIT_ASSERT( aint("0") == aint(0LL ) );
+    CPPUNIT_ASSERT( aint("0") == aint(0U  ) );
+    CPPUNIT_ASSERT( aint("0") == aint(0UL ) );
+    CPPUNIT_ASSERT( aint("0") == aint(0ULL) );
 
-   	CPPUNIT_ASSERT( aint("-1000")       == aint(      -1000   ) );
-   	CPPUNIT_ASSERT( aint( "1000")       == aint(       1000   ) );
-   	CPPUNIT_ASSERT( aint( "1000")       == aint(       1000U  ) );
-   	CPPUNIT_ASSERT( aint("-1000000")    == aint(   -1000000L  ) );
-   	CPPUNIT_ASSERT( aint( "1000000")    == aint(    1000000L  ) );
-   	CPPUNIT_ASSERT( aint( "1000000")    == aint(    1000000UL ) );
-   	CPPUNIT_ASSERT( aint("-1000000000") == aint(-1000000000LL ) );
-   	CPPUNIT_ASSERT( aint( "1000000000") == aint( 1000000000LL ) );
-   	CPPUNIT_ASSERT( aint( "1000000000") == aint( 1000000000ULL) );
+    CPPUNIT_ASSERT( aint("-1000")       == aint(      -1000   ) );
+    CPPUNIT_ASSERT( aint( "1000")       == aint(       1000   ) );
+    CPPUNIT_ASSERT( aint( "1000")       == aint(       1000U  ) );
+    CPPUNIT_ASSERT( aint("-1000000")    == aint(   -1000000L  ) );
+    CPPUNIT_ASSERT( aint( "1000000")    == aint(    1000000L  ) );
+    CPPUNIT_ASSERT( aint( "1000000")    == aint(    1000000UL ) );
+    CPPUNIT_ASSERT( aint("-1000000000") == aint(-1000000000LL ) );
+    CPPUNIT_ASSERT( aint( "1000000000") == aint( 1000000000LL ) );
+    CPPUNIT_ASSERT( aint( "1000000000") == aint( 1000000000ULL) );
 
-   	CPPUNIT_ASSERT( aint("0") == aint(std::string("0")) );
+    CPPUNIT_ASSERT( aint("0") == aint(std::string("0")) );
 }
 
 // eof

@@ -50,9 +50,7 @@ aint::aint(const unsigned long int i) : impl_(new impl(i)) {
 aint::aint(const unsigned long long int i) : impl_(new impl(i)) {
 }
 aint::aint(const aint& a) : impl_(new impl(*a.impl_)) {
-//	std::cout << __FUNCTION__ << " (aint copy ctor)" << std::endl;
 }
 aint::aint(aint&& a) : impl_(std::move(a.impl_)) {
-//	std::cout << __FUNCTION__ << " (aint move ctor)" << std::endl;
 }
 } // end of namespace astd

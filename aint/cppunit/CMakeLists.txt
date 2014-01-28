@@ -35,9 +35,9 @@ target_link_libraries(aint-unit aint cppunit)
 
 # add run-aint-unit target to run unit tests
 add_custom_target(run-aint-unit ALL
-	./cppunit/aint-unit 
-	WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/../
-	COMMENT "Running aint unit test" VERBATIM
+    ./cppunit/aint-unit 
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/../
+    COMMENT "Running aint unit test" VERBATIM
 )
 add_dependencies(run-aint-unit aint-unit)
 

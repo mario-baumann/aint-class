@@ -50,16 +50,16 @@ set(INSTALL_LIB_DIR     aint/lib     CACHE PATH "Installation directory for libr
 set(INSTALL_CMAKE_DIR   aint/cmake   CACHE PATH "Installation directory for CMake files ")
 
 install(TARGETS aint
-	# IMPORTANT: Add the aint library to the "export-set"
-	EXPORT aintTargets
-	LIBRARY DESTINATION "${INSTALL_LIB_DIR}" COMPONENT lib
-	PUBLIC_HEADER DESTINATION "${INSTALL_INCLUDE_DIR}/aint"
-	COMPONENT dev
+    # IMPORTANT: Add the aint library to the "export-set"
+    EXPORT aintTargets
+    LIBRARY DESTINATION "${INSTALL_LIB_DIR}" COMPONENT lib
+    PUBLIC_HEADER DESTINATION "${INSTALL_INCLUDE_DIR}/aint"
+    COMPONENT dev
 )
 install(TARGETS aint-static
-	# IMPORTANT: Add the aint-static library to the "export-set"
-	EXPORT aintTargets
-	ARCHIVE DESTINATION "${INSTALL_LIB_DIR}" COMPONENT lib
+    # IMPORTANT: Add the aint-static library to the "export-set"
+    EXPORT aintTargets
+    ARCHIVE DESTINATION "${INSTALL_LIB_DIR}" COMPONENT lib
 )
 
 add_subdirectory(cppunit)

@@ -31,50 +31,50 @@
 namespace astd {
 
 bool aint::operator<(const aint& rhs) const {
-	bool posL = this->impl_->positive_;
-	bool posR = rhs.impl_->positive_;
-	if (posL != posR) {
-		return(posL ? false : true);
-	}
-	// posL == posR
-	bool LLtR = this->impl_->operatorLtAbs(*this, rhs); // checks if abs(lhs) < abs(rhs)
-	return(posL ? LLtR : !LLtR);
+    bool posL = this->impl_->positive_;
+    bool posR = rhs.impl_->positive_;
+    if (posL != posR) {
+        return(posL ? false : true);
+    }
+    // posL == posR
+    bool LLtR = this->impl_->operatorLtAbs(*this, rhs); // checks if abs(lhs) < abs(rhs)
+    return(posL ? LLtR : !LLtR);
 }
 bool aint::operator<(const int rhs) const {
-	return(this->impl_->operatorLtLL(*this, rhs));
+    return(this->impl_->operatorLtLL(*this, rhs));
 }
 bool aint::operator<(const long int rhs) const {
-	return(this->impl_->operatorLtLL(*this, rhs));
+    return(this->impl_->operatorLtLL(*this, rhs));
 }
 bool aint::operator<(const long long int rhs) const {
-	return(this->impl_->operatorLtLL(*this, rhs));
+    return(this->impl_->operatorLtLL(*this, rhs));
 }
 bool aint::operator<(const unsigned int rhs) const {
-	return(this->impl_->operatorLtULL(*this, rhs));
+    return(this->impl_->operatorLtULL(*this, rhs));
 }
 bool aint::operator<(const unsigned long int rhs) const {
-	return(this->impl_->operatorLtULL(*this, rhs));
+    return(this->impl_->operatorLtULL(*this, rhs));
 }
 bool aint::operator<(const unsigned long long int rhs) const {
-	return(this->impl_->operatorLtULL(*this, rhs));
+    return(this->impl_->operatorLtULL(*this, rhs));
 }
 bool operator<(const int lhs, const aint& rhs) {
-	return(aint(lhs) < rhs);
+    return(aint(lhs) < rhs);
 }
 bool operator<(const long int lhs, const aint& rhs) {
-	return(aint(lhs) < rhs);
+    return(aint(lhs) < rhs);
 }
 bool operator<(const long long int lhs, const aint& rhs) {
-	return(aint(lhs) < rhs);
+    return(aint(lhs) < rhs);
 }
 bool operator<(const unsigned int lhs, const aint& rhs) {
-	return(aint(lhs) < rhs);
+    return(aint(lhs) < rhs);
 }
 bool operator<(const unsigned long int lhs, const aint& rhs) {
-	return(aint(lhs) < rhs);
+    return(aint(lhs) < rhs);
 }
 bool operator<(const unsigned long long int lhs, const aint& rhs) {
-	return(aint(lhs) < rhs);
+    return(aint(lhs) < rhs);
 }
 
 } // end of namespace astd

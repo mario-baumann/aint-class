@@ -35,19 +35,19 @@ void aint::impl::operatorPlusAdd(const aint& lhs, const aint& rhs, aint& res) co
     data& u = lhs.impl_->data_;
     data& v = rhs.impl_->data_;
     data& w = res.impl_->data_;
-	size_t m = u.size();
+    size_t m = u.size();
     size_t n = v.size();
     res.impl_->resizeAndZeroise(m + 1);
     doubleComp carry = 0;
     for (int j = 0; j < m; ++j) {
         // promote the first operand to doubleComp
-		// to ensure doubleComp-arithmetic is used
-	    doubleComp tmp = static_cast<doubleComp>(u[j]) + ( j < n ? v[j] : 0 ) + carry;
-	    w[j]  = tmp % C_SINGLE_COMP_MAX_P1;
-	    carry = tmp / C_SINGLE_COMP_MAX_P1;
+        // to ensure doubleComp-arithmetic is used
+        doubleComp tmp = static_cast<doubleComp>(u[j]) + ( j < n ? v[j] : 0 ) + carry;
+        w[j]  = tmp % C_SINGLE_COMP_MAX_P1;
+        carry = tmp / C_SINGLE_COMP_MAX_P1;
     }
     if (carry) {
-	    w[m] = carry;
+        w[m] = carry;
     }
     res.impl_->removeLeadingZeros();
 }
@@ -63,16 +63,16 @@ void aint::impl::operatorPlusSub(const aint& lhs, const aint& rhs, aint& res) co
     doubleComp borrow = 0;
     for (int j = 0; j < m; ++j) {
         // promote the first operand to doubleComp
-		// to ensure doubleComp-arithmetic is used
-	    doubleComp tmp = static_cast<doubleComp>(u[j]) - ( j < n ? v[j] : 0 ) - borrow;
-	    if (tmp < 0) {
-	        // borrow from next element
-	        borrow = 1;
-	        tmp += C_SINGLE_COMP_MAX_P1;
-	    } else {
-	        borrow = 0;
-	    }
-	    w[j] = tmp;
+        // to ensure doubleComp-arithmetic is used
+        doubleComp tmp = static_cast<doubleComp>(u[j]) - ( j < n ? v[j] : 0 ) - borrow;
+        if (tmp < 0) {
+            // borrow from next element
+            borrow = 1;
+            tmp += C_SINGLE_COMP_MAX_P1;
+        } else {
+            borrow = 0;
+        }
+        w[j] = tmp;
     }
     res.impl_->removeLeadingZeros();
 }
@@ -82,15 +82,15 @@ bool aint::impl::operatorPlusChk(const aint& lhs, const aint& rhs) const {
     size_t m = lhs.impl_->data_.size();
     size_t n = rhs.impl_->data_.size();
     if (n < m) {
-	    return(true);
+        return(true);
     } else if (m < n) {
-    	return(false);
+        return(false);
     } else {
-    	// m == n
-    	// use operator< to check if lhs < rhs OR rhs <= lhs
-    	if (this->operatorLtAbs(lhs, rhs)) {
-	        return(false);
-    	}
+        // m == n
+        // use operator< to check if lhs < rhs OR rhs <= lhs
+        if (this->operatorLtAbs(lhs, rhs)) {
+            return(false);
+        }
     }
     return(true);
 }
@@ -98,9 +98,9 @@ bool aint::impl::operatorPlusChk(const aint& lhs, const aint& rhs) const {
 void aint::impl::operatorPlus(const aint& lhs, const aint& rhs, aint& res, bool minusSwitch) const {
     typedef void (aint::impl::*Helper)(const aint& lhs, const aint& rhs, aint& res) const;
     struct entry {
-    	Helper helper;
-	    bool lhs_rhs;
-	    bool res_positive;
+        Helper helper;
+        bool lhs_rhs;
+        bool res_positive;
     };
     const struct entry table[8 + 8] = {
         //
@@ -155,11 +155,6 @@ void aint::impl::operatorPlus(const aint& lhs, const aint& rhs, aint& res, bool 
     res.impl_->positive_ = e->res_positive;
     // make sure 0 has positive sign
     res.impl_->makeZeroPositive();
-//    if (!res.impl_->positive_ &&
-//    	res.impl_->data_.size() == 1 &&
-//    	res.impl_->data_[0] == 0) {
-//    	res.impl_->positive_ = true;
-//    }
 }
 
 } // end of namespace astd

@@ -34,8 +34,8 @@
 namespace astd {
 
 std::ostream& operator<< (std::ostream& out, const aint& a) {
-	std::stringstream ss;
-	if (!a.impl_->positive_) {
+    std::stringstream ss;
+    if (!a.impl_->positive_) {
         ss << '-';
     }
     for (auto rit = a.impl_->data_.crbegin(); rit != a.impl_->data_.crend(); ++rit) {

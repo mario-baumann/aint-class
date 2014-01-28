@@ -31,14 +31,12 @@
 namespace astd {
 
 aint& aint::operator=(const aint& rhs) {
-//	std::cout << __FUNCTION__ << " (aint copy assignment operator)" << std::endl;
     if (this != &rhs) {
         *impl_ = *rhs.impl_;
     }
     return(*this);
 }
 aint& aint::operator=(aint&& rhs) {
-//	std::cout << __FUNCTION__ << " (aint move assignment operator)" << std::endl;
     if (this != &rhs) {
         *impl_ = std::move(*rhs.impl_);
     }

@@ -28,22 +28,22 @@
 
 void aintTest::testMember() {
 
-	CPPUNIT_ASSERT( aint(        -1).digits() == 1 );
-	CPPUNIT_ASSERT( aint(         0).digits() == 1 );
-	CPPUNIT_ASSERT( aint(         1).digits() == 1 );
-	CPPUNIT_ASSERT( aint(         9).digits() == 1 );
-	CPPUNIT_ASSERT( aint(        10).digits() == 2 );
-	CPPUNIT_ASSERT( aint(        12).digits() == 2 );
-	CPPUNIT_ASSERT( aint(        19).digits() == 2 );
-	CPPUNIT_ASSERT( aint(       100).digits() == 3 );
-	CPPUNIT_ASSERT( aint(      1000).digits() == 4 );
-	CPPUNIT_ASSERT( aint(     10000).digits() == 5 );
-	CPPUNIT_ASSERT( aint(    100000).digits() == 6 );
-	CPPUNIT_ASSERT( aint(   1000000).digits() == 7 );
-	CPPUNIT_ASSERT( aint(  10000000).digits() == 8 );
-	CPPUNIT_ASSERT( aint( 100000000).digits() == 9 );
-	CPPUNIT_ASSERT( aint(1000000000).digits() == 10 );
-	CPPUNIT_ASSERT( aint("354224848179261915075").digits() == 21 );
+    CPPUNIT_ASSERT( aint(        -1).digits() == 1 );
+    CPPUNIT_ASSERT( aint(         0).digits() == 1 );
+    CPPUNIT_ASSERT( aint(         1).digits() == 1 );
+    CPPUNIT_ASSERT( aint(         9).digits() == 1 );
+    CPPUNIT_ASSERT( aint(        10).digits() == 2 );
+    CPPUNIT_ASSERT( aint(        12).digits() == 2 );
+    CPPUNIT_ASSERT( aint(        19).digits() == 2 );
+    CPPUNIT_ASSERT( aint(       100).digits() == 3 );
+    CPPUNIT_ASSERT( aint(      1000).digits() == 4 );
+    CPPUNIT_ASSERT( aint(     10000).digits() == 5 );
+    CPPUNIT_ASSERT( aint(    100000).digits() == 6 );
+    CPPUNIT_ASSERT( aint(   1000000).digits() == 7 );
+    CPPUNIT_ASSERT( aint(  10000000).digits() == 8 );
+    CPPUNIT_ASSERT( aint( 100000000).digits() == 9 );
+    CPPUNIT_ASSERT( aint(1000000000).digits() == 10 );
+    CPPUNIT_ASSERT( aint("354224848179261915075").digits() == 21 );
 
     CPPUNIT_ASSERT( aint( 0).factorial() == 1 );
     CPPUNIT_ASSERT( aint( 1).factorial() == 1 );

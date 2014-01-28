@@ -32,36 +32,36 @@ namespace astd {
 
 aint aint::impl::factorialIterative(const aint& n) const {
     const unsigned long long int facTable[] = {
-    	1ULL, // == 0!
-    	1ULL,
-    	2ULL,
-    	6ULL,
-    	24ULL,
-    	120ULL,
-    	720ULL,
-    	5040ULL,
-    	40320ULL,
-    	362880ULL,
-    	3628800ULL, // == 10!
-    	39916800ULL,
-    	479001600ULL,
-    	6227020800ULL,
-    	87178291200ULL,
-    	1307674368000ULL,
-    	20922789888000ULL,
-    	355687428096000ULL,
-    	6402373705728000ULL,
-    	121645100408832000ULL,
-    	2432902008176640000ULL // == 20!
+        1ULL, // == 0!
+        1ULL,
+        2ULL,
+        6ULL,
+        24ULL,
+        120ULL,
+        720ULL,
+        5040ULL,
+        40320ULL,
+        362880ULL,
+        3628800ULL, // == 10!
+        39916800ULL,
+        479001600ULL,
+        6227020800ULL,
+        87178291200ULL,
+        1307674368000ULL,
+        20922789888000ULL,
+        355687428096000ULL,
+        6402373705728000ULL,
+        121645100408832000ULL,
+        2432902008176640000ULL // == 20!
     };
     const size_t facTableSize = sizeof(facTable) / sizeof(facTable[0]);
     if (n < facTableSize) {
-    	aint fac = facTable[n.impl_->data_[0]];
-    	return(fac);
+        aint fac = facTable[n.impl_->data_[0]];
+        return(fac);
     }
     aint fac = facTable[facTableSize - 1];
     for (size_t j = facTableSize; j <= n; ++j) {
-    	fac = fac * j;
+        fac = fac * j;
     }
     return(fac);
 }

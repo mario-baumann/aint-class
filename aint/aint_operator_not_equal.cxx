@@ -31,43 +31,43 @@
 namespace astd {
 
 bool aint::operator!=(const aint& rhs) const {
-	return(!(*this == rhs));
+    return(!(*this == rhs));
 }
 bool aint::operator!=(const int rhs) const {
-	return(!(*this == rhs));
+    return(!(*this == rhs));
 }
 bool aint::operator!=(const long int rhs) const {
-	return(!(*this == rhs));
+    return(!(*this == rhs));
 }
 bool aint::operator!=(const long long int rhs) const {
-	return(!(*this == rhs));
+    return(!(*this == rhs));
 }
 bool aint::operator!=(const unsigned int rhs) const {
-	return(!(*this == rhs));
+    return(!(*this == rhs));
 }
 bool aint::operator!=(const unsigned long int rhs) const {
-	return(!(*this == rhs));
+    return(!(*this == rhs));
 }
 bool aint::operator!=(const unsigned long long int rhs) const {
-	return(!(*this == rhs));
+    return(!(*this == rhs));
 }
 bool operator!=(const int lhs, const aint& rhs) {
-	return(!(lhs == rhs));
+    return(!(lhs == rhs));
 }
 bool operator!=(const long int lhs, const aint& rhs) {
-	return(!(lhs == rhs));
+    return(!(lhs == rhs));
 }
 bool operator!=(const long long int lhs, const aint& rhs) {
-	return(!(lhs == rhs));
+    return(!(lhs == rhs));
 }
 bool operator!=(const unsigned int lhs, const aint& rhs) {
-	return(!(lhs == rhs));
+    return(!(lhs == rhs));
 }
 bool operator!=(const unsigned long int lhs, const aint& rhs) {
-	return(!(lhs == rhs));
+    return(!(lhs == rhs));
 }
 bool operator!=(const unsigned long long int lhs, const aint& rhs) {
-	return(!(lhs == rhs));
+    return(!(lhs == rhs));
 }
 
 } // end of namespace astd

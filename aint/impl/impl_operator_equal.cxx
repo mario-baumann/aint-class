@@ -31,35 +31,35 @@
 namespace astd {
 
 bool aint::impl::operatorEqLL(const aint& lhs, const long long int rhs) const {
-	// checks if lhs == rhs
+    // checks if lhs == rhs
 
     // try to avoid the generic operator call
     if (rhs >= 0) {
-    	if (!lhs.impl_->positive_) {
-    	    return(false);
-    	} else if (lhs.impl_->data_.size() == 1) {
-  			return(lhs.impl_->data_[0] == rhs ? true : false);
-    	}
+        if (!lhs.impl_->positive_) {
+            return(false);
+        } else if (lhs.impl_->data_.size() == 1) {
+            return(lhs.impl_->data_[0] == rhs ? true : false);
+        }
     } else {
-    	if (lhs.impl_->positive_) {
-    	    return(false);
-    	} else if (lhs.impl_->data_.size() == 1) {
-  			return(lhs.impl_->data_[0] == (-rhs) ? true : false);
-    	}
+        if (lhs.impl_->positive_) {
+            return(false);
+        } else if (lhs.impl_->data_.size() == 1) {
+            return(lhs.impl_->data_[0] == (-rhs) ? true : false);
+        }
     }
-	return(lhs.operator==(aint(rhs)));
+    return(lhs.operator==(aint(rhs)));
 }
 
 bool aint::impl::operatorEqULL(const aint& lhs, const unsigned long long int rhs) const {
-	// checks if lhs == rhs
+    // checks if lhs == rhs
 
     // try to avoid the generic operator call
-   	if (!lhs.impl_->positive_) {
-   	    return(false);
-   	} else if (lhs.impl_->data_.size() == 1) {
+    if (!lhs.impl_->positive_) {
+        return(false);
+    } else if (lhs.impl_->data_.size() == 1) {
         return(lhs.impl_->data_[0] == rhs ? true : false);
-   	}
-	return(lhs.operator==(aint(rhs)));
+    }
+    return(lhs.operator==(aint(rhs)));
 }
 
 } // end of namespace astd

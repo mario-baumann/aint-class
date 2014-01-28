@@ -190,9 +190,8 @@ const aint operator%(const unsigned long long int lhs, const aint& rhs) throw(st
     return(rem);
 }
 
-
 const aint::adiv aint::div(const aint& rhs) const throw(std::overflow_error) {
-	std::pair<aint,aint> res;
+    std::pair<aint,aint> res;
     this->impl_->operatorDivide(*this, rhs, res.first, res.second);
     return(res);
 }

@@ -31,7 +31,7 @@
 namespace astd {
 
 const aint aint::operator+() {
-	return(*this);
+    return(*this);
 }
 const aint aint::operator+(const aint& rhs) const {
     aint res;

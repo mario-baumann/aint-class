@@ -31,10 +31,10 @@
 namespace astd {
 
 const aint aint::operator-() {
-	if (this->impl_->data_.size() != 1 || this->impl_->data_[0] != 0) {
-	    this->impl_->positive_ = !(this->impl_->positive_);
-	}
-	return(*this);
+    if (this->impl_->data_.size() != 1 || this->impl_->data_[0] != 0) {
+        this->impl_->positive_ = !(this->impl_->positive_);
+    }
+    return(*this);
 }
 const aint aint::operator-(const aint& rhs) const {
     aint res;

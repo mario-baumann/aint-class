@@ -30,9 +30,9 @@ if (Boost_FOUND)
     add_executable(aint-calc aint-calc.cxx)
     target_link_libraries(aint-calc aint-static)
     install(TARGETS aint-calc
-    	# IMPORTANT: Add the aint-calc executable to the "export-set"
-    	EXPORT aintTargets
-    	RUNTIME DESTINATION "${INSTALL_BIN_DIR}" COMPONENT bin
+        # IMPORTANT: Add the aint-calc executable to the "export-set"
+        EXPORT aintTargets
+        RUNTIME DESTINATION "${INSTALL_BIN_DIR}" COMPONENT bin
     )
 endif()
 #

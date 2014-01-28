@@ -33,24 +33,24 @@
 #include <iomanip>
 #endif
 
-void aintTest::testFibonacci()	{
+void aintTest::testFibonacci() {
     aint f1("-1"); // F_{-2}
     aint f2("+1"); // F_{-1}
     aint fj;
     for (int j = 0; j <= 300; ++j) {
-	    fj = f1 + f2;
+        fj = f1 + f2;
 #if defined(PRINT_CPPUNIT_FIBONACCI)
-	    if (j < 10 || j % 10 == 0) {
-	    	std::cout << "fibonacci[" << std::setw(3) << std::setfill('0') << j << "] = " << fj << std::endl;
-	    }
+        if (j < 10 || j % 10 == 0) {
+            std::cout << "fibonacci[" << std::setw(3) << std::setfill('0') << j << "] = " << fj << std::endl;
+        }
 #endif
-	    f1 = f2;
-	    f2 = fj;
+        f1 = f2;
+        f2 = fj;
     }
     aint F_300 = fj;
     // http://www.maths.surrey.ac.uk/hosted-sites/R.Knott/Fibonacci/fibtable.html
     aint F_300_ref = aint("222232244629420445529739893461909967206666939096499764990979600");
-	CPPUNIT_ASSERT( F_300 == F_300_ref );
+    CPPUNIT_ASSERT( F_300 == F_300_ref );
 }
 
 // eof

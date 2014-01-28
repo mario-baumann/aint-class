@@ -31,13 +31,13 @@
 namespace astd {
 
 void aint::impl::clear() {
-	this->data_.clear();
-	this->positive_ = true;
+    this->data_.clear();
+    this->positive_ = true;
 }
 
 void aint::impl::removeLeadingZeros() {
     data& d = this->data_;
-	size_t j = d.size() - 1;
+    size_t j = d.size() - 1;
     while (j > 0 && d[j] == 0) {
         --j;
     }
@@ -47,31 +47,31 @@ void aint::impl::removeLeadingZeros() {
 }
 
 void aint::impl::resizeAndZeroise(size_t size) {
-	data& d = this->data_;
-	d.resize(size);
-	std::fill(d.begin(), d.end(), 0);
+    data& d = this->data_;
+    d.resize(size);
+    std::fill(d.begin(), d.end(), 0);
 }
 
 void aint::impl::makeZeroPositive() {
-	if (!this->positive_ &&	this->data_.size() == 1 && this->data_[0] == 0) {
-		this->positive_ = true;
-	}
+    if (!this->positive_ && this->data_.size() == 1 && this->data_[0] == 0) {
+        this->positive_ = true;
+    }
 }
 
 aint aint::impl::operatorPower(const aint& base, const aint& exp) const {
-	// compute base^exp with "exponentiation by squaring"
-	// see also http://en.wikipedia.org/wiki/Exponentiation_by_squaring
-	if (exp < 0) {
-		return(aint(0));
-	} else if (exp == 0) {
-		return(aint(1));
-	} else if (exp == 1) {
-		return(base);
-	} else if (exp.even()) {
-		return(aint::impl::operatorPower(base * base, exp / 2));
-	} else {
-		return(base * aint::impl::operatorPower(base * base, (exp - 1)/ 2));
-	}
+    // compute base^exp with "exponentiation by squaring"
+    // see also http://en.wikipedia.org/wiki/Exponentiation_by_squaring
+    if (exp < 0) {
+        return(aint(0));
+    } else if (exp == 0) {
+        return(aint(1));
+    } else if (exp == 1) {
+        return(base);
+    } else if (exp.even()) {
+        return(aint::impl::operatorPower(base * base, exp / 2));
+    } else {
+        return(base * aint::impl::operatorPower(base * base, (exp - 1)/ 2));
+    }
 }
 
 } // end of namespace astd

@@ -31,39 +31,39 @@
 namespace astd {
 
 bool aint::impl::operatorLtLL(const aint& lhs, const long long int rhs) const {
-	// checks if lhs < rhs
+    // checks if lhs < rhs
 
     // try to avoid the generic operator call
     if (rhs > 0) {
-    	if (!lhs.impl_->positive_) {
-    	    return(true);
-    	} else if (lhs.impl_->data_.size() == 1) {
-  			return(lhs.impl_->data_[0] < rhs ? true : false);
-    	}
+        if (!lhs.impl_->positive_) {
+            return(true);
+        } else if (lhs.impl_->data_.size() == 1) {
+            return(lhs.impl_->data_[0] < rhs ? true : false);
+        }
     } else {
-    	if (lhs.impl_->positive_) {
-    	    return(false);
-    	} else if (lhs.impl_->data_.size() == 1) {
-  			return(lhs.impl_->data_[0] <= (-rhs) ? false : true);
-    	}
+        if (lhs.impl_->positive_) {
+            return(false);
+        } else if (lhs.impl_->data_.size() == 1) {
+            return(lhs.impl_->data_[0] <= (-rhs) ? false : true);
+        }
     }
-	return(lhs.operator<(aint(rhs)));
+    return(lhs.operator<(aint(rhs)));
 }
 
 bool aint::impl::operatorLtULL(const aint& lhs, const unsigned long long int rhs) const {
-	// checks if lhs < rhs
+    // checks if lhs < rhs
 
     // try to avoid the generic operator call
     if (!lhs.impl_->positive_) {
         return(true);
     } else if (lhs.impl_->data_.size() == 1) {
-  		return(lhs.impl_->data_[0] < rhs ? true : false);
+        return(lhs.impl_->data_[0] < rhs ? true : false);
     }
-	return(lhs.operator<(aint(rhs)));
+    return(lhs.operator<(aint(rhs)));
 }
 
 bool aint::impl::operatorLtAbs(const aint& lhs, const aint& rhs) const {
-	// checks if abs(lhs) < abs(rhs)
+    // checks if abs(lhs) < abs(rhs)
     size_t LS = lhs.impl_->data_.size();
     size_t RS = rhs.impl_->data_.size();
     if (LS < RS) {

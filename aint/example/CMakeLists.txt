@@ -32,9 +32,9 @@ target_link_libraries(aint-example aint)
 
 # add run-aint-example target to run aint example
 add_custom_target(run-aint-example ALL
-	./example/aint-example 
-	WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/../
-	COMMENT "Running aint example" VERBATIM
+    ./example/aint-example 
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/../
+    COMMENT "Running aint example" VERBATIM
 )
 add_dependencies(run-aint-example aint-example)
 

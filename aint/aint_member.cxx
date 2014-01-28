@@ -41,7 +41,7 @@ std::string aint::dump() const {
     ss << "  data...... \n";
     int j = dim;
     for (auto rit = this->impl_->data_.crbegin(); rit != this->impl_->data_.crend(); ++rit) {
-	    ss << "    [" << std::setw(3) << j << "]... " << (int) *rit << "\n";
+        ss << "    [" << std::setw(3) << j << "]... " << (int) *rit << "\n";
         --j;
     }
     ss << ")";
@@ -50,11 +50,11 @@ std::string aint::dump() const {
 
 
 int aint::digits() const {
-	// returns the number of digits 'd' for the current aint
-	// d = digits of data[dim - 1] + C_SINGLE_COMP_WIDTH * (dim - 1)
-	size_t dim = this->impl_->data_.size();
-	aint::impl::singleComp t = this->impl_->data_[dim - 1];
-	int d = aint::impl::C_SINGLE_COMP_WIDTH * (dim - 1);
+    // returns the number of digits 'd' for the current aint
+    // d = digits of data[dim - 1] + C_SINGLE_COMP_WIDTH * (dim - 1)
+    size_t dim = this->impl_->data_.size();
+    aint::impl::singleComp t = this->impl_->data_[dim - 1];
+    int d = aint::impl::C_SINGLE_COMP_WIDTH * (dim - 1);
     if (t < 10) return(d + 1);
     if (t < 100) return(d + 2);
     if (t < 1000) return(d + 3);
@@ -69,13 +69,13 @@ int aint::digits() const {
 
 bool aint::even() const {
     // returns true if the aint is even and otherwise false
-	return((this->impl_->data_[0]) % 2 == 0);
+    return((this->impl_->data_[0]) % 2 == 0);
 }
 
 aint aint::factorial() {
-	if (*this < 100) {
+    if (*this < 100) {
         return(this->impl_->factorialIterative(*this));
-	}
+    }
     return(this->impl_->factorialRecursiveProduct(1, *this));
 }
 

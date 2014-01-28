@@ -32,12 +32,12 @@ namespace astd {
 
 bool aint::operator==(const aint& rhs) const {
     if (this->impl_->positive_ != rhs.impl_->positive_) {
-	    return(false);
+        return(false);
     }
     size_t LS = this->impl_->data_.size();
     size_t RS = rhs.impl_->data_.size();
     if (LS != RS) {
-	    return(false);
+        return(false);
     }
     // LS == RS
     for (size_t j = 0; j < LS; ++j) {
@@ -48,40 +48,40 @@ bool aint::operator==(const aint& rhs) const {
     return(true);
 }
 bool aint::operator==(const int rhs) const {
-	return(this->impl_->operatorEqLL(*this, rhs));
+    return(this->impl_->operatorEqLL(*this, rhs));
 }
 bool aint::operator==(const long int rhs) const {
-	return(this->impl_->operatorEqLL(*this, rhs));
+    return(this->impl_->operatorEqLL(*this, rhs));
 }
 bool aint::operator==(const long long int rhs) const {
-	return(this->impl_->operatorEqLL(*this, rhs));
+    return(this->impl_->operatorEqLL(*this, rhs));
 }
 bool aint::operator==(const unsigned int rhs) const {
-	return(this->impl_->operatorEqULL(*this, rhs));
+    return(this->impl_->operatorEqULL(*this, rhs));
 }
 bool aint::operator==(const unsigned long int rhs) const {
-	return(this->impl_->operatorEqULL(*this, rhs));
+    return(this->impl_->operatorEqULL(*this, rhs));
 }
 bool aint::operator==(const unsigned long long int rhs) const {
-	return(this->impl_->operatorEqULL(*this, rhs));
+    return(this->impl_->operatorEqULL(*this, rhs));
 }
 bool operator==(const int lhs, const aint& rhs) {
-	return(rhs.impl_->operatorEqLL(rhs, lhs));
+    return(rhs.impl_->operatorEqLL(rhs, lhs));
 }
 bool operator==(const long int lhs, const aint& rhs) {
-	return(rhs.impl_->operatorEqLL(rhs, lhs));
+    return(rhs.impl_->operatorEqLL(rhs, lhs));
 }
 bool operator==(const long long int lhs, const aint& rhs) {
-	return(rhs.impl_->operatorEqLL(rhs, lhs));
+    return(rhs.impl_->operatorEqLL(rhs, lhs));
 }
 bool operator==(const unsigned int lhs, const aint& rhs) {
-	return(rhs.impl_->operatorEqULL(rhs, lhs));
+    return(rhs.impl_->operatorEqULL(rhs, lhs));
 }
 bool operator==(const unsigned long int lhs, const aint& rhs) {
-	return(rhs.impl_->operatorEqULL(rhs, lhs));
+    return(rhs.impl_->operatorEqULL(rhs, lhs));
 }
 bool operator==(const unsigned long long int lhs, const aint& rhs) {
-	return(rhs.impl_->operatorEqULL(rhs, lhs));
+    return(rhs.impl_->operatorEqULL(rhs, lhs));
 }
 
 } // end of namespace astd

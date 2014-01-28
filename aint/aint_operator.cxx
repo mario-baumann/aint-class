@@ -31,13 +31,13 @@
 namespace astd {
 
 const aint aint::operator^(const aint& exp) const {
-	return(this->impl_->operatorPower(*this, exp));
+    return(this->impl_->operatorPower(*this, exp));
 }
 
 } // end of namespace astd
 
 namespace alit {
     astd::aint operator"" _A(const char* s) throw(std::invalid_argument) { // to define aint's like 1234567890_A
-	return(astd::aint(s));
+        return(astd::aint(s));
     }
 } // end of namespace alit

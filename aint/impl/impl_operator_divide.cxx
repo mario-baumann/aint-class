@@ -48,22 +48,22 @@ namespace astd {
 void aint::impl::operatorDivideSingle(const aint& lhs, const singleComp rhs, aint& quot, aint& rem) const throw(std::overflow_error) {
     // compute lhs = rhs * quot + rem   (short division => rhs is a singleComp)
 
-	// check for division by zero
-	if (rhs == 0) {
-		throw std::overflow_error("Divide by zero");
-	}
-	bool vPositive = (rhs < 0 ? false : true);
-	data& u = lhs.impl_->data_;
-	singleComp v = (vPositive ? rhs : (-rhs));
+    // check for division by zero
+    if (rhs == 0) {
+        throw std::overflow_error("Divide by zero");
+    }
+    bool vPositive = (rhs < 0 ? false : true);
+    data& u = lhs.impl_->data_;
+    singleComp v = (vPositive ? rhs : (-rhs));
     data& w = quot.impl_->data_;
     data& e = rem.impl_->data_;
     size_t m = u.size();
     quot.impl_->resizeAndZeroise(m);
     doubleComp carry = 0;
     for (int j = m - 1; j >= 0; --j) {
-    	doubleComp tmp = static_cast<doubleComp>(u[j]) + carry * C_SINGLE_COMP_MAX_P1;
-    	w[j]  = tmp / v;
-    	carry = tmp - static_cast<doubleComp>(w[j]) * v;
+        doubleComp tmp = static_cast<doubleComp>(u[j]) + carry * C_SINGLE_COMP_MAX_P1;
+        w[j]  = tmp / v;
+        carry = tmp - static_cast<doubleComp>(w[j]) * v;
     }
     quot.impl_->removeLeadingZeros();
     quot.impl_->positive_ = (lhs.impl_->positive_ == vPositive ? true : false);
@@ -75,8 +75,8 @@ void aint::impl::operatorDivideSingle(const aint& lhs, const singleComp rhs, ain
 
 bool aint::impl::operatorDivideLessLeft(aint& lhs, const aint& rhs, const int p) {
     // check if lhs < rhs by working on the (>= p) left components of lhs
-	data& u = lhs.impl_->data_;
-	data& v = rhs.impl_->data_;
+    data& u = lhs.impl_->data_;
+    data& v = rhs.impl_->data_;
     size_t m = u.size() - p;
     size_t n = v.size();
     if (m < n) {
@@ -100,29 +100,25 @@ bool aint::impl::operatorDivideLessLeft(aint& lhs, const aint& rhs, const int p)
 void aint::impl::operatorDivideMinusLeft(aint& lhs, const aint& rhs, const int p) {
     // compute lhs = lhs - rhs by working on the (>= p) left components of lhs
 
-	data& u = lhs.impl_->data_;
-	data& v = rhs.impl_->data_;
-	//size_t m = u.size();
-	size_t n = v.size();
+    data& u = lhs.impl_->data_;
+    data& v = rhs.impl_->data_;
+    //size_t m = u.size();
+    size_t n = v.size();
 
     doubleComp borrow = 0;
     for (int i = 0; i < n + 1; ++i) {
         // promote the first operand to doubleComp
-		// to ensure doubleComp-arithmetic is used
-	    doubleComp tmp = static_cast<doubleComp>(u[p + i]) - (i < n ? v[i] : 0) - borrow;
-	    if (tmp < 0) {
-	        // borrow from next element
-	        borrow = 1;
-	        tmp += C_SINGLE_COMP_MAX_P1;
-	    } else {
-	        borrow = 0;
-	    }
-	    u[p + i] = tmp;
+        // to ensure doubleComp-arithmetic is used
+        doubleComp tmp = static_cast<doubleComp>(u[p + i]) - (i < n ? v[i] : 0) - borrow;
+        if (tmp < 0) {
+            // borrow from next element
+            borrow = 1;
+            tmp += C_SINGLE_COMP_MAX_P1;
+        } else {
+            borrow = 0;
+        }
+        u[p + i] = tmp;
     }
-//    std::cout << "1d: borrow.....=" << borrow << std::endl;
-//    if (borrow) {
-//    	lhs.impl_->positive_ = false;
-//    }
     lhs.impl_->removeLeadingZeros();
 }
 
@@ -130,73 +126,73 @@ void aint::impl::operatorDivideMinusLeft(aint& lhs, const aint& rhs, const int p
 void aint::impl::operatorDivide(const aint& lhs, const aint& rhs, aint& quot, aint& rem) const throw(std::overflow_error) {
     // compute lhs = rhs * quot + rem  (long division)
 
-	// check for division by zero
+    // check for division by zero
     if (rhs == 0) {
-		throw std::overflow_error("Divide by zero");
+        throw std::overflow_error("Divide by zero");
     }
     // handle trivial case 1
-	if (this->operatorLtAbs(lhs, rhs)) {
-		quot = 0;
-    	rem = lhs;
-    	return;
+    if (this->operatorLtAbs(lhs, rhs)) {
+        quot = 0;
+        rem = lhs;
+        return;
     }
     // handle trivial case 2
     if (lhs == rhs) {
-    	quot = 1;
-    	rem = 0;
-    	return;
+        quot = 1;
+        rem = 0;
+        return;
     }
     // handle short division
-	data& v0 = rhs.impl_->data_;
-	size_t n = v0.size();
+    data& v0 = rhs.impl_->data_;
+    size_t n = v0.size();
     if (n == 1) {
-    	this->operatorDivideSingle(lhs, (rhs.impl_->positive_ ? v0[0] : -v0[0]), quot, rem);
-    	return;
+        this->operatorDivideSingle(lhs, (rhs.impl_->positive_ ? v0[0] : -v0[0]), quot, rem);
+        return;
     }
 
     // use D.Knuth's algorithm D from TAoCP, Vol 2, 4.3.1;
-	data& u0 = lhs.impl_->data_;
-	data&  q = quot.impl_->data_;
-	size_t m = u0.size() - n;
-	quot.impl_->resizeAndZeroise(m + 1);
-	rem.impl_->resizeAndZeroise(n);
+    data& u0 = lhs.impl_->data_;
+    data&  q = quot.impl_->data_;
+    size_t m = u0.size() - n;
+    quot.impl_->resizeAndZeroise(m + 1);
+    rem.impl_->resizeAndZeroise(n);
 
-	// [D1] Normalise
-	singleComp b = C_SINGLE_COMP_MAX_P1;
-	singleComp d = b / (v0[n - 1] + 1); // see Early errata for Volume 2 (3rd ed.)
-	aint lhsd = lhs * d;
-	aint rhsd = rhs * d;
-	data& u = lhsd.impl_->data_;
-	data& v = rhsd.impl_->data_;
+    // [D1] Normalise
+    singleComp b = C_SINGLE_COMP_MAX_P1;
+    singleComp d = b / (v0[n - 1] + 1); // see Early errata for Volume 2 (3rd ed.)
+    aint lhsd = lhs * d;
+    aint rhsd = rhs * d;
+    data& u = lhsd.impl_->data_;
+    data& v = rhsd.impl_->data_;
 
-	// [D2] Initialise j
-	for (int j = m; j >= 0; --j) {
-		// [D3] Calculate q-hat
-		// promote the first operand to doubleComp to ensure doubleComp-arithmetic is used
+    // [D2] Initialise j
+    for (int j = m; j >= 0; --j) {
+        // [D3] Calculate q-hat
+        // promote the first operand to doubleComp to ensure doubleComp-arithmetic is used
         doubleComp tmp = static_cast<doubleComp>(u[j + n]) * b + u[j + n - 1];
         doubleComp qh = tmp / v[n - 1];
         doubleComp rh = tmp % v[n - 1];
         if ( qh >= b // see Early errata for Volume 2 (3rd ed.)
-          || qh * v[n - 2] > b * rh + u[j + n - 2]) {
-        	qh -= 1;
-        	rh += v[n - 1];
+             || qh * v[n - 2] > b * rh + u[j + n - 2]) {
+            qh -= 1;
+            rh += v[n - 1];
         }
         // [D5] Test remainer
         if (lhsd.impl_->operatorDivideLessLeft(lhsd, rhsd * qh, j)) {
             // [D6] Add back
-        	qh -= 1;
+            qh -= 1;
         }
         // [D4] Multiply and subtract
         lhsd.impl_->operatorDivideMinusLeft(lhsd, rhsd * qh, j);
         q[j] = qh;
-	}
-	// [D7] loop on j
+    }
+    // [D7] loop on j
 
-	// [D8] Unnormalise
-	rem = lhsd / d;
+    // [D8] Unnormalise
+    rem = lhsd / d;
 
-	// finalise reminder
-	rem.impl_->removeLeadingZeros();
+    // finalise reminder
+    rem.impl_->removeLeadingZeros();
     rem.impl_->positive_ = lhs.impl_->positive_;
     rem.impl_->makeZeroPositive();
 

@@ -26,76 +26,74 @@
 // aint unit tests
 #include "cppunit.hxx"
 
-void aintTest::testOperatorEqual()	{
-    	CPPUNIT_ASSERT( aint("0") == 0    );
-    	CPPUNIT_ASSERT( aint("0") == 0L   );
-    	CPPUNIT_ASSERT( aint("0") == 0LL  );
-    	CPPUNIT_ASSERT( aint("0") == 0U   );
-    	CPPUNIT_ASSERT( aint("0") == 0UL  );
-    	CPPUNIT_ASSERT( aint("0") == 0ULL );
+void aintTest::testOperatorEqual()        {
 
-    	CPPUNIT_ASSERT( aint("-1") == -1    );
-    	CPPUNIT_ASSERT( aint("-1") == -1L   );
-    	CPPUNIT_ASSERT( aint("-1") == -1LL  );
-    	CPPUNIT_ASSERT( aint( "1") ==  1    );
-    	CPPUNIT_ASSERT( aint( "1") ==  1L   );
-    	CPPUNIT_ASSERT( aint( "1") ==  1LL  );
-    	CPPUNIT_ASSERT( aint( "1") ==  1U   );
-    	CPPUNIT_ASSERT( aint( "1") ==  1UL  );
-    	CPPUNIT_ASSERT( aint( "1") ==  1ULL );
+    CPPUNIT_ASSERT( aint("0") == 0    );
+    CPPUNIT_ASSERT( aint("0") == 0L   );
+    CPPUNIT_ASSERT( aint("0") == 0LL  );
+    CPPUNIT_ASSERT( aint("0") == 0U   );
+    CPPUNIT_ASSERT( aint("0") == 0UL  );
+    CPPUNIT_ASSERT( aint("0") == 0ULL );
 
-    	CPPUNIT_ASSERT( aint("-1000000"      ) ==       -1000000    );
-    	CPPUNIT_ASSERT( aint( "1000000"      ) ==        1000000    );
-    	CPPUNIT_ASSERT( aint( "1000000"      ) ==        1000000U   );
-    	CPPUNIT_ASSERT( aint("-1000000000"   ) ==    -1000000000L   );
-    	CPPUNIT_ASSERT( aint( "1000000000"   ) ==     1000000000L   );
-    	CPPUNIT_ASSERT( aint( "1000000000"   ) ==     1000000000UL  );
-    	CPPUNIT_ASSERT( aint("-1000000000000") == -1000000000000LL  );
-    	CPPUNIT_ASSERT( aint( "1000000000000") ==  1000000000000LL  );
-    	CPPUNIT_ASSERT( aint( "1000000000000") ==  1000000000000ULL );
+    CPPUNIT_ASSERT( aint("-1") == -1    );
+    CPPUNIT_ASSERT( aint("-1") == -1L   );
+    CPPUNIT_ASSERT( aint("-1") == -1LL  );
+    CPPUNIT_ASSERT( aint( "1") ==  1    );
+    CPPUNIT_ASSERT( aint( "1") ==  1L   );
+    CPPUNIT_ASSERT( aint( "1") ==  1LL  );
+    CPPUNIT_ASSERT( aint( "1") ==  1U   );
+    CPPUNIT_ASSERT( aint( "1") ==  1UL  );
+    CPPUNIT_ASSERT( aint( "1") ==  1ULL );
 
-    	CPPUNIT_ASSERT(       -1000000    == aint("-1000000"      ) );
-    	CPPUNIT_ASSERT(        1000000    == aint( "1000000"      ) );
-    	CPPUNIT_ASSERT(        1000000U   == aint( "1000000"      ) );
-    	CPPUNIT_ASSERT(    -1000000000L   == aint("-1000000000"   ) );
-    	CPPUNIT_ASSERT(     1000000000L   == aint( "1000000000"   ) );
-    	CPPUNIT_ASSERT(     1000000000UL  == aint( "1000000000"   ) );
-    	CPPUNIT_ASSERT( -1000000000000LL  == aint("-1000000000000") );
-    	CPPUNIT_ASSERT(  1000000000000LL  == aint( "1000000000000") );
-    	CPPUNIT_ASSERT(  1000000000000ULL == aint( "1000000000000") );
+    CPPUNIT_ASSERT( aint("-1000000"      ) ==       -1000000    );
+    CPPUNIT_ASSERT( aint( "1000000"      ) ==        1000000    );
+    CPPUNIT_ASSERT( aint( "1000000"      ) ==        1000000U   );
+    CPPUNIT_ASSERT( aint("-1000000000"   ) ==    -1000000000L   );
+    CPPUNIT_ASSERT( aint( "1000000000"   ) ==     1000000000L   );
+    CPPUNIT_ASSERT( aint( "1000000000"   ) ==     1000000000UL  );
+    CPPUNIT_ASSERT( aint("-1000000000000") == -1000000000000LL  );
+    CPPUNIT_ASSERT( aint( "1000000000000") ==  1000000000000LL  );
+    CPPUNIT_ASSERT( aint( "1000000000000") ==  1000000000000ULL );
 
-    	CPPUNIT_ASSERT( (*a1 = aint("0")) == 0    );
-    	CPPUNIT_ASSERT( (*a1 = aint("0")) == 0L   );
-    	CPPUNIT_ASSERT( (*a1 = aint("0")) == 0LL  );
-    	CPPUNIT_ASSERT( (*a1 = aint("0")) == 0U   );
-    	CPPUNIT_ASSERT( (*a1 = aint("0")) == 0UL  );
-    	CPPUNIT_ASSERT( (*a1 = aint("0")) == 0ULL );
+    CPPUNIT_ASSERT(       -1000000    == aint("-1000000"      ) );
+    CPPUNIT_ASSERT(        1000000    == aint( "1000000"      ) );
+    CPPUNIT_ASSERT(        1000000U   == aint( "1000000"      ) );
+    CPPUNIT_ASSERT(    -1000000000L   == aint("-1000000000"   ) );
+    CPPUNIT_ASSERT(     1000000000L   == aint( "1000000000"   ) );
+    CPPUNIT_ASSERT(     1000000000UL  == aint( "1000000000"   ) );
+    CPPUNIT_ASSERT( -1000000000000LL  == aint("-1000000000000") );
+    CPPUNIT_ASSERT(  1000000000000LL  == aint( "1000000000000") );
+    CPPUNIT_ASSERT(  1000000000000ULL == aint( "1000000000000") );
 
-    	CPPUNIT_ASSERT( (*a1 = aint("-1")) == -1    );
-    	CPPUNIT_ASSERT( (*a1 = aint("-1")) == -1L   );
-    	CPPUNIT_ASSERT( (*a1 = aint("-1")) == -1LL  );
-    	CPPUNIT_ASSERT( (*a1 = aint( "1")) ==  1    );
-    	CPPUNIT_ASSERT( (*a1 = aint( "1")) ==  1L   );
-    	CPPUNIT_ASSERT( (*a1 = aint( "1")) ==  1LL  );
-    	CPPUNIT_ASSERT( (*a1 = aint( "1")) ==  1U   );
-    	CPPUNIT_ASSERT( (*a1 = aint( "1")) ==  1UL  );
-    	CPPUNIT_ASSERT( (*a1 = aint( "1")) ==  1ULL );
+    CPPUNIT_ASSERT( (*a1 = aint("0")) == 0    );
+    CPPUNIT_ASSERT( (*a1 = aint("0")) == 0L   );
+    CPPUNIT_ASSERT( (*a1 = aint("0")) == 0LL  );
+    CPPUNIT_ASSERT( (*a1 = aint("0")) == 0U   );
+    CPPUNIT_ASSERT( (*a1 = aint("0")) == 0UL  );
+    CPPUNIT_ASSERT( (*a1 = aint("0")) == 0ULL );
 
-		CPPUNIT_ASSERT( (*a1 =       -1000000   ) == aint(      -1000000   ) );
-    	CPPUNIT_ASSERT( (*a1 =        1000000   ) == aint(       1000000   ) );
-    	CPPUNIT_ASSERT( (*a1 =        1000000U  ) == aint(       1000000U  ) );
-    	CPPUNIT_ASSERT( (*a1 =    -1000000000L  ) == aint(   -1000000000L  ) );
-    	CPPUNIT_ASSERT( (*a1 =     1000000000L  ) == aint(    1000000000L  ) );
-    	CPPUNIT_ASSERT( (*a1 =     1000000000UL ) == aint(    1000000000UL ) );
-    	CPPUNIT_ASSERT( (*a1 = -1000000000000LL ) == aint(-1000000000000LL ) );
-    	CPPUNIT_ASSERT( (*a1 =  1000000000000LL ) == aint( 1000000000000LL ) );
-    	CPPUNIT_ASSERT( (*a1 =  1000000000000ULL) == aint( 1000000000000ULL) );
+    CPPUNIT_ASSERT( (*a1 = aint("-1")) == -1    );
+    CPPUNIT_ASSERT( (*a1 = aint("-1")) == -1L   );
+    CPPUNIT_ASSERT( (*a1 = aint("-1")) == -1LL  );
+    CPPUNIT_ASSERT( (*a1 = aint( "1")) ==  1    );
+    CPPUNIT_ASSERT( (*a1 = aint( "1")) ==  1L   );
+    CPPUNIT_ASSERT( (*a1 = aint( "1")) ==  1LL  );
+    CPPUNIT_ASSERT( (*a1 = aint( "1")) ==  1U   );
+    CPPUNIT_ASSERT( (*a1 = aint( "1")) ==  1UL  );
+    CPPUNIT_ASSERT( (*a1 = aint( "1")) ==  1ULL );
 
-    	CPPUNIT_ASSERT( (*a1 = "1000000000000"  ) == aint( 1000000000000LL ) );
-    	CPPUNIT_ASSERT( (*a1 = std::string("1000000000000")  ) == aint( 1000000000000LL ) );
+    CPPUNIT_ASSERT( (*a1 =       -1000000   ) == aint(      -1000000   ) );
+    CPPUNIT_ASSERT( (*a1 =        1000000   ) == aint(       1000000   ) );
+    CPPUNIT_ASSERT( (*a1 =        1000000U  ) == aint(       1000000U  ) );
+    CPPUNIT_ASSERT( (*a1 =    -1000000000L  ) == aint(   -1000000000L  ) );
+    CPPUNIT_ASSERT( (*a1 =     1000000000L  ) == aint(    1000000000L  ) );
+    CPPUNIT_ASSERT( (*a1 =     1000000000UL ) == aint(    1000000000UL ) );
+    CPPUNIT_ASSERT( (*a1 = -1000000000000LL ) == aint(-1000000000000LL ) );
+    CPPUNIT_ASSERT( (*a1 =  1000000000000LL ) == aint( 1000000000000LL ) );
+    CPPUNIT_ASSERT( (*a1 =  1000000000000ULL) == aint( 1000000000000ULL) );
 
-    	//CPPUNIT_ASSERT( *m_10_1 == *m_10_1 );
-		//CPPUNIT_ASSERT( !(*m_10_1 == *m_11_2) );
-    }
+    CPPUNIT_ASSERT( (*a1 = "1000000000000"  ) == aint( 1000000000000LL ) );
+    CPPUNIT_ASSERT( (*a1 = std::string("1000000000000")  ) == aint( 1000000000000LL ) );
+}
 
 // eof

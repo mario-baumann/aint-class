@@ -33,21 +33,21 @@ namespace astd {
 
 void aint::impl::operatorTimesSingle( const aint& lhs, const singleComp rhs, aint& res) const {
     // compute res = lhs * rhs (where rhs is a singleComp)
-	bool vPositive = (rhs < 0 ? false : true);
-	data& u = lhs.impl_->data_;
-	singleComp v = (vPositive ? rhs : (-rhs));
+    bool vPositive = (rhs < 0 ? false : true);
+    data& u = lhs.impl_->data_;
+    singleComp v = (vPositive ? rhs : (-rhs));
     data& w = res.impl_->data_;
     size_t m = u.size();
     res.impl_->resizeAndZeroise(m + 1);
-  	doubleComp carry = 0;
-   	for (int i = 0; i < m; ++i) {
+    doubleComp carry = 0;
+    for (int i = 0; i < m; ++i) {
         // promote the first operand to doubleComp
-   		// to ensure doubleComp-arithmetic is used
+        // to ensure doubleComp-arithmetic is used
         doubleComp tmp = static_cast<doubleComp>(u[i]) * v + carry;
         w[i]  = tmp % C_SINGLE_COMP_MAX_P1;
         carry = tmp / C_SINGLE_COMP_MAX_P1;
-   	}
-   	w[m] = carry;
+    }
+    w[m] = carry;
     res.impl_->removeLeadingZeros();
     // set sign of result
     res.impl_->positive_ = (lhs.impl_->positive_ == vPositive ? true : false);
@@ -55,29 +55,29 @@ void aint::impl::operatorTimesSingle( const aint& lhs, const singleComp rhs, ain
 
 void aint::impl::operatorTimes( const aint& lhs, const aint& rhs, aint& res) const {
     // compute res = lhs * rhs
-	data& v = rhs.impl_->data_;
+    data& v = rhs.impl_->data_;
     size_t n = v.size();
     if (n == 1) {
-    	// use operatorTimesSgl from above
-    	this->operatorTimesSingle(lhs, (rhs.impl_->positive_ ? v[0] : -v[0]), res);
-    	return;
+        // use operatorTimesSgl from above
+        this->operatorTimesSingle(lhs, (rhs.impl_->positive_ ? v[0] : -v[0]), res);
+        return;
     }
-	data& u = lhs.impl_->data_;
+    data& u = lhs.impl_->data_;
     data& w = res.impl_->data_;
     size_t m = u.size();
     // use D.Knuth's algorithm M from TAoCP, Vol 2, 4.3.1;
     res.impl_->resizeAndZeroise(m + n);
     // skip the 'for (int i = 0; i < m; ++i) { w[i] = 0; }' in algorithm M, because every entry in w is set to 0 by resizeAndZeroise
     for (int j = 0; j < n; ++j) {
-    	doubleComp carry = 0;
-    	for (int i = 0; i < m; ++i) {
-	        // promote the first operand to doubleComp
-    		// to ensure doubleComp-arithmetic is used
-	        doubleComp tmp = static_cast<doubleComp>(u[i]) * v[j] + w[i + j] + carry;
-	        w[i + j] = tmp % C_SINGLE_COMP_MAX_P1;
-	        carry    = tmp / C_SINGLE_COMP_MAX_P1;
-    	}
-    	w[m + j] = carry;
+        doubleComp carry = 0;
+        for (int i = 0; i < m; ++i) {
+            // promote the first operand to doubleComp
+            // to ensure doubleComp-arithmetic is used
+            doubleComp tmp = static_cast<doubleComp>(u[i]) * v[j] + w[i + j] + carry;
+            w[i + j] = tmp % C_SINGLE_COMP_MAX_P1;
+            carry    = tmp / C_SINGLE_COMP_MAX_P1;
+        }
+        w[m + j] = carry;
     }
     res.impl_->removeLeadingZeros();
     // set sign of result
