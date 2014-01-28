@@ -1,0 +1,7 @@
+//!
+//! \mainpage (a)rbitrary long (int)eger API documentation
+//!
+//! \image html title-page.jpg 
+//!
+//! AINT provides a class that allows operations to be performed on arbitrarily large integers.  
+//! 
