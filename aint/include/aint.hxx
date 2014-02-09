@@ -284,6 +284,14 @@ public:
     // power operator(s)
     const aint operator^(const aint& exp) const;
 
+    // increment operator(s)
+    aint& operator++();
+    const aint operator++(int);
+
+    // decrement operator(s)
+    aint& operator--();
+    const aint operator--(int);
+
     // member functions
     //! dumps to a string
     std::string dump() const;

@@ -22,6 +22,7 @@ What C++ techniques are used:
 What is already working:
 - arithmetic operations: +, -, *, /, %, ^ (power)
 - relational operations: ==, !=, <, <=, >, >=
+- increment, decrement operations: ++, --
 - special functions: dump(), digits(), even(), factorial()
 - small calc program (aint-calc) similar to bc, e.g.
   ./aint-calc '5^4^3^2'
@@ -29,7 +30,6 @@ What is already working:
      http://rosettacode.org/wiki/Arbitrary-precision_integers_%28included%29)
 
 What is still missing:
-- increment, decrement operations: ++, --
 - compound  assignment operations: +=, -=, *=, /=, %=, ^=
 - fast integer multiplications like the Toom-Cook algorithm or the
   Schoenhage-Strassen algorithm
