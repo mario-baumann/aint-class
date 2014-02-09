@@ -30,31 +30,31 @@
 
 namespace astd {
 
-    aint& aint::operator--() {
-        if (this->impl_->positive_) {
-            // aint is positvie
-            if (this->impl_->data_[0] == 0) {
-                // handle underflow in last data segment
-                this->impl_->operatorPlus(aint(*this), aint(1), *this, true);
-            } else {
-                this->impl_->data_[0] -= 1;
-            }
+aint& aint::operator--() {
+    if (this->impl_->positive_) {
+        // aint is positvie
+        if (this->impl_->data_[0] == 0) {
+            // handle underflow in last data segment
+            this->impl_->operatorPlus(aint(*this), aint(1), *this, true);
         } else {
-            // aint is negative
-            if (this->impl_->data_[0] == this->impl_->C_SINGLE_COMP_MAX_P1 - 1) {
-                // handle overflow in last data segment
-                this->impl_->operatorPlus(aint(*this), aint(1), *this);
-            } else {
-                this->impl_->data_[0] += 1;
-            }
+            this->impl_->data_[0] -= 1;
         }
-        return(*this);
+    } else {
+        // aint is negative
+        if (this->impl_->data_[0] == this->impl_->C_SINGLE_COMP_MAX_P1 - 1) {
+            // handle overflow in last data segment
+            this->impl_->operatorPlus(aint(*this), aint(1), *this);
+        } else {
+            this->impl_->data_[0] += 1;
+        }
     }
+    return(*this);
+}
 
-    const aint aint::operator--(int) {
-        aint res(*this); // store current state
-        --(*this);       // apply above operator
-        return(res);     // return saved state
-    }
+const aint aint::operator--(int) {
+    aint res(*this); // store current state
+    --(*this);       // apply above operator
+    return(res);     // return saved state
+}
 
 } // end of namespace astd
