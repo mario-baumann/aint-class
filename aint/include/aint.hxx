@@ -281,9 +281,6 @@ public:
     typedef std::pair<aint, aint> adiv;
     const adiv div(const aint& rhs) const throw(std::overflow_error); // computes quotient and remainder simultaneously
 
-    // power operator(s)
-    const aint operator^(const aint& exp) const;
-
     // increment operator(s)
     aint& operator++();
     const aint operator++(int);
@@ -301,6 +298,8 @@ public:
     bool even() const;
     //! computes the factorial
     aint factorial();
+    //! computes the power
+    aint power(const aint& exp);
 
 private:
     // use pimpl idiom

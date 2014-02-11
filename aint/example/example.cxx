@@ -63,7 +63,7 @@ int main(int argc, char* argv[]) {
 
     try {
         cout << endl;
-        cout << "Fibonacci numbers F_j:" << endl;
+        cout << "Fibonacci numbers F_j := F_{j-1} + F_{j-2}, with F_0 := 0 and F_1 := 1" << endl;
         cout << endl;
         cout << "typeid, F_0, F_1, F_2, F_3, F_4, F_5, F_6,  F_20,      F_40,          F_60,              F_80,                 F_100" << endl;
         cout << setw(120) << setfill('-') << " " << setfill(' ') << endl;

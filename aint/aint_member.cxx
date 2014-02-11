@@ -79,4 +79,9 @@ aint aint::factorial() {
     return(this->impl_->factorialRecursiveProduct(1, *this));
 }
 
+aint aint::power(const aint& exp) {
+    return(this->impl_->operatorPower(*this, exp));
+}
+
+
 } // end of namespace astd

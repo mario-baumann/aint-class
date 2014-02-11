@@ -84,7 +84,7 @@ namespace client {
             case '*': stck.push(a1 * a2); break;
             case '/': stck.push(a1 / a2); break;
             case '%': stck.push(a1 % a2); break;
-            case '^': stck.push(a1 ^ a2); break;
+            case '^': stck.push(a1.power(a2)); break;
             }
             if (dbg) {
                 cout << __FUNCTION__ << ": " << stck.top() << " ( " << a1 << " " << op << " " << a2 << " ) " << endl;
