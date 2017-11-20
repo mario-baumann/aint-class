@@ -25,12 +25,11 @@
 
 # aint project - cmake
 
-cmake_minimum_required (VERSION 2.8.4)
+cmake_minimum_required (VERSION 3.0)
 
 project(aint CXX)
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMakeModules)
-find_package(CppUnit REQUIRED)
 
 add_subdirectory(aint)
 

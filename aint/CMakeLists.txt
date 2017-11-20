@@ -37,21 +37,24 @@ add_library(aint-static
     ${HxxFiles} ${HxxImplFiles} ${CxxFiles} ${CxxImplFiles}
 )
 
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}/include")
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}/impl/include")
+include_directories(
+    "${CMAKE_CURRENT_SOURCE_DIR}/include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/impl/include"
+)
 
 set_target_properties(aint
     PROPERTIES PUBLIC_HEADER "include/aint.hxx"
 )
 
-set(INSTALL_BIN_DIR     aint/bin     CACHE PATH "Installation directory for executables ")
-set(INSTALL_INCLUDE_DIR aint/include CACHE PATH "Installation directory for header files")
-set(INSTALL_LIB_DIR     aint/lib     CACHE PATH "Installation directory for libraries   ")
-set(INSTALL_CMAKE_DIR   aint/cmake   CACHE PATH "Installation directory for CMake files ")
+set(INSTALL_BIN_DIR     ${CMAKE_INSTALL_PREFIX}/aint/bin     CACHE PATH "Installation directory for executables" )
+set(INSTALL_INCLUDE_DIR ${CMAKE_INSTALL_PREFIX}/aint/include CACHE PATH "Installation directory for header files")
+set(INSTALL_LIB_DIR     ${CMAKE_INSTALL_PREFIX}/aint/lib     CACHE PATH "Installation directory for libraries"   )
+set(INSTALL_CMAKE_DIR   ${CMAKE_INSTALL_PREFIX}/aint/cmake   CACHE PATH "Installation directory for cmake files" )
 
 install(TARGETS aint
     # IMPORTANT: Add the aint library to the "export-set"
     EXPORT aintTargets
+    ARCHIVE DESTINATION "${INSTALL_LIB_DIR}" COMPONENT lib
     LIBRARY DESTINATION "${INSTALL_LIB_DIR}" COMPONENT lib
     PUBLIC_HEADER DESTINATION "${INSTALL_INCLUDE_DIR}/aint"
     COMPONENT dev
@@ -62,7 +65,10 @@ install(TARGETS aint-static
     ARCHIVE DESTINATION "${INSTALL_LIB_DIR}" COMPONENT lib
 )
 
-add_subdirectory(cppunit)
+find_package(CppUnit)
+if (CppUnit_FOUND)
+    add_subdirectory(cppunit)
+endif()
 add_subdirectory(example)
 add_subdirectory(calc)
 

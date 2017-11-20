@@ -24,33 +24,39 @@
  #
  ###########################################################################
 
-# shell script to build aint project on linux and cygwin
+# shell script to build aint project
 
 run_cmake() {
     echo "+ cmake $@"
     cmake "$@"
 }
 
-if [ $(echo $HOME | grep -c -e '^/cygdrive/') -gt 0 ]; then
-    BUILD_ARCH="cygwin"
-else
-    BUILD_ARCH="linux"
+if [ "_$1" = "_" ]; then
+    echo "Usage: $(basename $0) SRC_DIR [BUILD_TYPE]"
+    echo " "
+    echo "How to use:"
+    echo "    mkdir <build-folder>"
+    echo "    cd <build-folder>"
+    echo "    $(basename $0) <path-to-aint-sources> [Release|Debug]"
+    exit 0
 fi
-echo "BUILD_ARCH: $BUILD_ARCH"
 
-BUILD_TYPE="Debug"
-BUILD_TYPE="Release"
-echo "BUILD_TYPE: $BUILD_TYPE"
+SOURCE_DIR=$1
+BUILD_TYPE=$2
 
-DEVEL_DIRY=$(dirname $(readlink -f "$0"))
-echo "DEVEL_DIRY: $DEVEL_DIRY"
+if [ ! -d ${SOURCE_DIR} ]; then
+    echo "ERROR: source folder ${SOURCE_DIR} does not exist!"
+    exit 1
+fi
 
-BUILD_DIRY="$(dirname $DEVEL_DIRY)/${BUILD_ARCH}-eclipse"
-echo "BUILD_DIRY: $BUILD_DIRY"
-
-rm -rf   $BUILD_DIRY
-mkdir -p $BUILD_DIRY
-cd       $BUILD_DIRY
+case '_'${BUILD_TYPE} in
+_Release|_Debug)
+    BUILD_TYPE="$1"
+    ;;
+*)
+    BUILD_TYPE="Release"
+    ;;
+esac
 
 run_cmake \
     -G "Eclipse CDT4 - Unix Makefiles" \
@@ -58,10 +64,7 @@ run_cmake \
     -D "_ECLIPSE_VERSION=4.3" \
     -D "CMAKE_CXX_COMPILER_ARG1=-std=c++11" \
     -D "CMAKE_ECLIPSE_MAKE_ARGUMENTS=-j4 --no-print-directory" \
-    -D "CMAKE_INSTALL_PREFIX=/tmp" \
-    $DEVEL_DIRY
-if [ -f Makefile ]; then
-    make -j 4
-fi
-#
+    -D "CMAKE_INSTALL_PREFIX=$(pwd)/install" \
+    ${SOURCE_DIR}
 
+# eof

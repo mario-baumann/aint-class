@@ -20,7 +20,7 @@ What C++ techniques are used:
 - moved constructors and move assignment operators
 
 What is already working:
-- arithmetic operations: +, -, *, /, %, ^ (power)
+- arithmetic operations: +, -, *, /, %
 - relational operations: ==, !=, <, <=, >, >=
 - increment, decrement operations: ++, --
 - special functions: dump(), digits(), even(), factorial()
@@ -30,7 +30,7 @@ What is already working:
      http://rosettacode.org/wiki/Arbitrary-precision_integers_%28included%29)
 
 What is still missing:
-- compound  assignment operations: +=, -=, *=, /=, %=, ^=
+- compound  assignment operations: +=, -=, *=, /=, %=
 - fast integer multiplications like the Toom-Cook algorithm or the
   Schoenhage-Strassen algorithm
  
