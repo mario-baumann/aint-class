@@ -45,7 +45,7 @@ namespace astd {
 // => sign(u%v) = sign(u)
 //
 
-void aint::impl::operatorDivideSingle(const aint& lhs, const singleComp rhs, aint& quot, aint& rem) const throw(std::overflow_error) {
+void aint::impl::operatorDivideSingle(const aint& lhs, const singleComp rhs, aint& quot, aint& rem) const {
     // compute lhs = rhs * quot + rem   (short division => rhs is a singleComp)
 
     // check for division by zero
@@ -123,7 +123,7 @@ void aint::impl::operatorDivideMinusLeft(aint& lhs, const aint& rhs, const int p
 }
 
 
-void aint::impl::operatorDivide(const aint& lhs, const aint& rhs, aint& quot, aint& rem) const throw(std::overflow_error) {
+void aint::impl::operatorDivide(const aint& lhs, const aint& rhs, aint& quot, aint& rem) const {
     // compute lhs = rhs * quot + rem  (long division)
 
     // check for division by zero

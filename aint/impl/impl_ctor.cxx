@@ -31,7 +31,7 @@
 namespace astd {
 
 // helper(s)
-void aint::impl::ctorC(const char* s) throw(std::invalid_argument) {
+void aint::impl::ctorC(const char* s) {
     this->clear();
     data& d = this->data_;
     // check for vaintd input
@@ -116,10 +116,10 @@ void aint::impl::ctorULL(const unsigned long long int i) {
 aint::impl::impl() : positive_(true) {
     data_.push_back(0);
 }
-aint::impl::impl(const char* s) throw(std::invalid_argument) : positive_(true) {
+aint::impl::impl(const char* s) : positive_(true) {
     this->ctorC(s);
 }
-aint::impl::impl(const std::string& s) throw(std::invalid_argument) : positive_(true) {
+aint::impl::impl(const std::string& s) : positive_(true) {
     this->ctorC(s.c_str());
 }
 aint::impl::impl(const int i) : positive_(true) {

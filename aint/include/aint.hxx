@@ -83,8 +83,8 @@ public:
     aint();
     aint(const aint& a);
     aint(      aint&& a);
-    aint(const char*        s) throw(std::invalid_argument);
-    aint(const std::string& s) throw(std::invalid_argument);
+    aint(const char*        s);
+    aint(const std::string& s);
     aint(const int    i);
     aint(const intL   i);
     aint(const intLL  i);
@@ -101,8 +101,8 @@ public:
     // assignment operator(s)
     aint& operator=(const aint& rhs);
     aint& operator=(      aint&& rhs);
-    aint& operator=(const char*        s) throw(std::invalid_argument);
-    aint& operator=(const std::string& s) throw(std::invalid_argument);
+    aint& operator=(const char*        s);
+    aint& operator=(const std::string& s);
     aint& operator=(const int    i);
     aint& operator=(const intL   i);
     aint& operator=(const intLL  i);
@@ -248,38 +248,38 @@ public:
     friend const aint operator*(const intULL lhs, const aint& rhs);
 
     // divide operator(s)
-    const aint operator/(const aint&  rhs) const throw(std::overflow_error);
-    const aint operator/(const int    rhs) const throw(std::overflow_error);
-    const aint operator/(const intL   rhs) const throw(std::overflow_error);
-    const aint operator/(const intLL  rhs) const throw(std::overflow_error);
-    const aint operator/(const intU   rhs) const throw(std::overflow_error);
-    const aint operator/(const intUL  rhs) const throw(std::overflow_error);
-    const aint operator/(const intULL rhs) const throw(std::overflow_error);
-    friend const aint operator/(const int    lhs, const aint& rhs) throw(std::overflow_error);
-    friend const aint operator/(const intL   lhs, const aint& rhs) throw(std::overflow_error);
-    friend const aint operator/(const intLL  lhs, const aint& rhs) throw(std::overflow_error);
-    friend const aint operator/(const intU   lhs, const aint& rhs) throw(std::overflow_error);
-    friend const aint operator/(const intUL  lhs, const aint& rhs) throw(std::overflow_error);
-    friend const aint operator/(const intULL lhs, const aint& rhs) throw(std::overflow_error);
+    const aint operator/(const aint&  rhs) const;
+    const aint operator/(const int    rhs) const;
+    const aint operator/(const intL   rhs) const;
+    const aint operator/(const intLL  rhs) const;
+    const aint operator/(const intU   rhs) const;
+    const aint operator/(const intUL  rhs) const;
+    const aint operator/(const intULL rhs) const;
+    friend const aint operator/(const int    lhs, const aint& rhs);
+    friend const aint operator/(const intL   lhs, const aint& rhs);
+    friend const aint operator/(const intLL  lhs, const aint& rhs);
+    friend const aint operator/(const intU   lhs, const aint& rhs);
+    friend const aint operator/(const intUL  lhs, const aint& rhs);
+    friend const aint operator/(const intULL lhs, const aint& rhs);
 
     // modulo operator(s)
-    const aint operator%(const aint&  rhs) const throw(std::overflow_error);
-    const aint operator%(const int    rhs) const throw(std::overflow_error);
-    const aint operator%(const intL   rhs) const throw(std::overflow_error);
-    const aint operator%(const intLL  rhs) const throw(std::overflow_error);
-    const aint operator%(const intU   rhs) const throw(std::overflow_error);
-    const aint operator%(const intUL  rhs) const throw(std::overflow_error);
-    const aint operator%(const intULL rhs) const throw(std::overflow_error);
-    friend const aint operator%(const int    lhs, const aint& rhs) throw(std::overflow_error);
-    friend const aint operator%(const intL   lhs, const aint& rhs) throw(std::overflow_error);
-    friend const aint operator%(const intLL  lhs, const aint& rhs) throw(std::overflow_error);
-    friend const aint operator%(const intU   lhs, const aint& rhs) throw(std::overflow_error);
-    friend const aint operator%(const intUL  lhs, const aint& rhs) throw(std::overflow_error);
-    friend const aint operator%(const intULL lhs, const aint& rhs) throw(std::overflow_error);
+    const aint operator%(const aint&  rhs) const;
+    const aint operator%(const int    rhs) const;
+    const aint operator%(const intL   rhs) const;
+    const aint operator%(const intLL  rhs) const;
+    const aint operator%(const intU   rhs) const;
+    const aint operator%(const intUL  rhs) const;
+    const aint operator%(const intULL rhs) const;
+    friend const aint operator%(const int    lhs, const aint& rhs);
+    friend const aint operator%(const intL   lhs, const aint& rhs);
+    friend const aint operator%(const intLL  lhs, const aint& rhs);
+    friend const aint operator%(const intU   lhs, const aint& rhs);
+    friend const aint operator%(const intUL  lhs, const aint& rhs);
+    friend const aint operator%(const intULL lhs, const aint& rhs);
 
     // divide and modulo operator(s)
     typedef std::pair<aint, aint> adiv;
-    const adiv div(const aint& rhs) const throw(std::overflow_error); // computes quotient and remainder simultaneously
+    const adiv div(const aint& rhs) const; // computes quotient and remainder simultaneously
 
     // increment operator(s)
     aint& operator++();
@@ -310,7 +310,7 @@ private:
 } // end of namespace astd
 
 namespace alit {
-    astd::aint operator"" _A(const char* s) throw(std::invalid_argument);
+    astd::aint operator"" _A(const char* s);
 } // end of namespace alit
 using namespace alit;
 

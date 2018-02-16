@@ -72,8 +72,8 @@ public:
     // ctor(s)
     impl();
     impl(const impl& a); // copy ctor
-    impl(const char* s) throw(std::invalid_argument);
-    impl(const std::string& s) throw(std::invalid_argument);
+    impl(const char* s);
+    impl(const std::string& s);
     impl(const int i);
     impl(const long int i);
     impl(const long long int i);
@@ -98,7 +98,7 @@ public:
     void makeZeroPositive();
 
     // helper functions for operators
-    void ctorC(  const char*) throw(std::invalid_argument);
+    void ctorC(  const char*);
     void ctorLL( const long long int i);
     void ctorULL(const unsigned long long int i);
     //
@@ -119,8 +119,8 @@ public:
     //
     void operatorDivideMinusLeft(aint& lhs, const aint& rhs, const int p);
     bool operatorDivideLessLeft(aint& lhs, const aint& rhs, const int p);
-    void operatorDivideSingle(const aint& lhs, const singleComp rhs, aint& quot, aint& rem) const throw(std::overflow_error);
-    void operatorDivide(const aint& lhs, const aint& rhs, aint& quot, aint& rem) const throw(std::overflow_error);
+    void operatorDivideSingle(const aint& lhs, const singleComp rhs, aint& quot, aint& rem) const;
+    void operatorDivide(const aint& lhs, const aint& rhs, aint& quot, aint& rem) const;
 
     aint operatorPower(const aint& base, const aint& exp) const;
 

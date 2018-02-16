@@ -33,9 +33,9 @@ namespace astd {
 // ctor(s)
 aint::aint() : impl_(new impl()) {
 }
-aint::aint(const char* s) throw(std::invalid_argument) : impl_(new impl(s)) {
+aint::aint(const char* s) : impl_(new impl(s)) {
 }
-aint::aint(const std::string& s) throw(std::invalid_argument) : impl_(new impl(s)) {
+aint::aint(const std::string& s) : impl_(new impl(s)) {
 }
 aint::aint(const int i) : impl_(new impl(i)) {
 }

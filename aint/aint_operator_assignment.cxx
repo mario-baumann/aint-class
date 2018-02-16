@@ -42,11 +42,11 @@ aint& aint::operator=(aint&& rhs) {
     }
     return(*this);
 }
-aint& aint::operator=(const char* s) throw(std::invalid_argument) {
+aint& aint::operator=(const char* s) {
     this->impl_->ctorC(s);
     return(*this);
 }
-aint& aint::operator=(const std::string& s) throw(std::invalid_argument) {
+aint& aint::operator=(const std::string& s) {
     this->impl_->ctorC(s.c_str());
     return(*this);
 }
