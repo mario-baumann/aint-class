@@ -29,12 +29,10 @@ file(GLOB HxxFiles "include/*.hxx")
 file(GLOB CxxFiles "*.cxx")
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/include")
-if(NOT "${CPPUNIT_CFLAGS}" STREQUAL "")
-    include_directories(${CPPUNIT_CFLAGS})
-endif()
+include_directories("${CPPUNIT_INCLUDE_DIR}")
 
 add_executable(aint-unit ${HxxFiles} ${CxxFiles})
-target_link_libraries(aint-unit aint ${CPPUNIT_LIBRARIES})
+target_link_libraries(aint-unit aint ${CPPUNIT_LIBRARY})
 
 # add run-aint-unit target to run unit tests
 add_custom_target(run-aint-unit ALL

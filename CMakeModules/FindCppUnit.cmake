@@ -1,69 +1,76 @@
-# - Try to find the libcppunit libraries
-# Once done this will define
+# - try to find cppunit library
 #
-# CppUnit_FOUND - system has libcppunit
-# CPPUNIT_INCLUDE_DIR - the libcppunit include directory
-# CPPUNIT_LIBRARIES - libcppunit library
+# Cache Variables: (probably not for direct use in your scripts)
+#  CPPUNIT_INCLUDE_DIR
+#  CPPUNIT_LIBRARY
+#
+# Non-cache variables you might use in your CMakeLists.txt:
+#  CPPUNIT_FOUND
+#  CPPUNIT_INCLUDE_DIRS
+#  CPPUNIT_LIBRARIES
+#
+# Requires these CMake modules:
+#  SelectLibraryConfigurations (included with CMake >= 2.8.0)
+#  FindPackageHandleStandardArgs (known included with CMake >=2.6.2)
+#
+# Original Author:
+# 2009-2011 Ryan Pavlik <rpavlik@iastate.edu> <abiryan@ryand.net>
+# http://academic.cleardefinition.com
+# Iowa State University HCI Graduate Program/VRAC
+#
+# Copyright Iowa State University 2009-2011.
+# Distributed under the Boost Software License, Version 1.0.
+# (See accompanying file LICENSE_1_0.txt or copy at
+# http://www.boost.org/LICENSE_1_0.txt)
 
-include (MacroEnsureVersion)
+set(CPPUNIT_ROOT_DIR
+	"${CPPUNIT_ROOT_DIR}"
+	CACHE
+	PATH
+	"Directory to search")
 
-if(NOT CPPUNIT_MIN_VERSION)
-  SET(CPPUNIT_MIN_VERSION 1.12.0)
-endif(NOT CPPUNIT_MIN_VERSION)
+find_library(CPPUNIT_LIBRARY_RELEASE
+	NAMES
+	cppunit
+	HINTS
+	"${CPPUNIT_ROOT_DIR}")
 
-FIND_PROGRAM(CPPUNIT_CONFIG_EXECUTABLE cppunit-config )
+find_library(CPPUNIT_LIBRARY_DEBUG
+	NAMES
+	cppunitd
+	HINTS
+	"${CPPUNIT_ROOT_DIR}")
 
-IF(CPPUNIT_INCLUDE_DIR AND CPPUNIT_LIBRARIES)
+include(SelectLibraryConfigurations)
+select_library_configurations(CPPUNIT)
 
-    # in cache already
-    SET(CppUnit_FOUND TRUE)
+# Might want to look close to the library first for the includes.
+get_filename_component(_libdir "${CPPUNIT_LIBRARY_RELEASE}" PATH)
 
-ELSE(CPPUNIT_INCLUDE_DIR AND CPPUNIT_LIBRARIES)
+find_path(CPPUNIT_INCLUDE_DIR
+	NAMES
+	cppunit/TestCase.h
+	HINTS
+	"${_libdir}/.."
+	PATHS
+	"${CPPUNIT_ROOT_DIR}"
+	PATH_SUFFIXES
+	include/)
 
-    SET(CPPUNIT_INCLUDE_DIR)
-    SET(CPPUNIT_LIBRARIES)
 
-    IF(CPPUNIT_CONFIG_EXECUTABLE)
-        EXEC_PROGRAM(${CPPUNIT_CONFIG_EXECUTABLE} ARGS --cflags RETURN_VALUE _return_VALUE OUTPUT_VARIABLE CPPUNIT_CFLAGS)
-        EXEC_PROGRAM(${CPPUNIT_CONFIG_EXECUTABLE} ARGS --libs RETURN_VALUE _return_VALUE OUTPUT_VARIABLE CPPUNIT_LIBRARIES)
-        EXEC_PROGRAM(${CPPUNIT_CONFIG_EXECUTABLE} ARGS --version RETURN_VALUE _return_VALUE OUTPUT_VARIABLE CPPUNIT_INSTALLED_VERSION)
-        STRING(REGEX REPLACE "-I(.+)" "\\1" CPPUNIT_CFLAGS "${CPPUNIT_CFLAGS}")
-    ELSE(CPPUNIT_CONFIG_EXECUTABLE)
-        # in case win32 needs to find it the old way?
-        FIND_PATH(CPPUNIT_CFLAGS cppunit/TestRunner.h PATHS /usr/include /usr/local/include )
-        FIND_LIBRARY(CPPUNIT_LIBRARIES NAMES cppunit PATHS /usr/lib /usr/local/lib )
-        # how can we find cppunit version?
-        MESSAGE (STATUS "Ensure you cppunit installed version is at least ${CPPUNIT_MIN_VERSION}")
-        SET (CPPUNIT_INSTALLED_VERSION ${CPPUNIT_MIN_VERSION})
-    ENDIF(CPPUNIT_CONFIG_EXECUTABLE)
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(cppunit
+	DEFAULT_MSG
+	CPPUNIT_LIBRARY
+	CPPUNIT_INCLUDE_DIR)
 
-    SET(CPPUNIT_INCLUDE_DIR ${CPPUNIT_CFLAGS} "${CPPUNIT_CFLAGS}/cppunit")
+if(CPPUNIT_FOUND)
+	set(CPPUNIT_LIBRARIES ${CPPUNIT_LIBRARY} ${CMAKE_DL_LIBS})
+	set(CPPUNIT_INCLUDE_DIRS "${CPPUNIT_INCLUDE_DIR}")
+	mark_as_advanced(CPPUNIT_ROOT_DIR)
+endif()
 
-ENDIF(CPPUNIT_INCLUDE_DIR AND CPPUNIT_LIBRARIES)
+mark_as_advanced(CPPUNIT_INCLUDE_DIR
+	CPPUNIT_LIBRARY_RELEASE
+	CPPUNIT_LIBRARY_DEBUG)
 
-IF(CPPUNIT_INCLUDE_DIR AND CPPUNIT_LIBRARIES)
-
-  SET(CppUnit_FOUND TRUE)
-
-  if(NOT CppUnit_FIND_QUIETLY)
-    MESSAGE (STATUS "Found cppunit: ${CPPUNIT_LIBRARIES}")
-  endif(NOT CppUnit_FIND_QUIETLY)
-
-  IF(CPPUNIT_CONFIG_EXECUTABLE)
-    EXEC_PROGRAM(${CPPUNIT_CONFIG_EXECUTABLE} ARGS --version RETURN_VALUE _return_VALUE OUTPUT_VARIABLE CPPUNIT_INSTALLED_VERSION)
-  ENDIF(CPPUNIT_CONFIG_EXECUTABLE)
-
-  macro_ensure_version( ${CPPUNIT_MIN_VERSION} ${CPPUNIT_INSTALLED_VERSION} CPPUNIT_INSTALLED_VERSION_OK )
-
-  IF(NOT CPPUNIT_INSTALLED_VERSION_OK)
-    MESSAGE ("** CppUnit version is too old: found ${CPPUNIT_INSTALLED_VERSION} installed, ${CPPUNIT_MIN_VERSION} or major is required")
-    SET(CppUnit_FOUND FALSE)
-  ENDIF(NOT CPPUNIT_INSTALLED_VERSION_OK)
-
-ELSE(CPPUNIT_INCLUDE_DIR AND CPPUNIT_LIBRARIES)
-
-  SET(CppUnit_FOUND FALSE CACHE BOOL "Not found cppunit library")
-
-ENDIF(CPPUNIT_INCLUDE_DIR AND CPPUNIT_LIBRARIES)
-
-MARK_AS_ADVANCED(CPPUNIT_INCLUDE_DIR CPPUNIT_LIBRARIES)

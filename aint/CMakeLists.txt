@@ -66,7 +66,7 @@ install(TARGETS aint-static
 )
 
 find_package(CppUnit)
-if (CppUnit_FOUND)
+if (CPPUNIT_FOUND)
     add_subdirectory(cppunit)
 endif()
 add_subdirectory(example)
