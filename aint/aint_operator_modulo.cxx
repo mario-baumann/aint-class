@@ -24,95 +24,89 @@
  **************************************************************************/
 
 // arbitrary long integer
-// aint_operator_divide.cxx (division operator(s))
+// aint_operator_modulo.cxx (modulo operator(s))
 
 #include "impl.hxx"
 
 namespace astd {
 
-const aint aint::operator/(const aint& rhs) const {
+const aint aint::operator%(const aint& rhs) const {
     aint quot;
     aint rem;
     this->impl_->operatorDivide(*this, rhs, quot, rem);
-    return(quot);
+    return(rem);
 }
-const aint aint::operator/(const int rhs) const {
+const aint aint::operator%(const int rhs) const {
     aint quot;
     aint rem;
     this->impl_->operatorDivide(*this, aint(rhs), quot, rem);
-    return(quot);
+    return(rem);
 }
-const aint aint::operator/(const long int rhs) const {
+const aint aint::operator%(const long int rhs) const {
     aint quot;
     aint rem;
     this->impl_->operatorDivide(*this, aint(rhs), quot, rem);
-    return(quot);
+    return(rem);
 }
-const aint aint::operator/(const long long int rhs) const {
+const aint aint::operator%(const long long int rhs) const {
     aint quot;
     aint rem;
     this->impl_->operatorDivide(*this, aint(rhs), quot, rem);
-    return(quot);
+    return(rem);
 }
-const aint aint::operator/(const unsigned int rhs) const {
+const aint aint::operator%(const unsigned int rhs) const {
     aint quot;
     aint rem;
     this->impl_->operatorDivide(*this, aint(rhs), quot, rem);
-    return(quot);
+    return(rem);
 }
-const aint aint::operator/(const unsigned long int rhs) const {
+const aint aint::operator%(const unsigned long int rhs) const {
     aint quot;
     aint rem;
     this->impl_->operatorDivide(*this, aint(rhs), quot, rem);
-    return(quot);
+    return(rem);
 }
-const aint aint::operator/(const unsigned long long int rhs) const {
+const aint aint::operator%(const unsigned long long int rhs) const {
     aint quot;
     aint rem;
     this->impl_->operatorDivide(*this, aint(rhs), quot, rem);
-    return(quot);
+    return(rem);
 }
-const aint operator/(const int lhs, const aint& rhs) {
+const aint operator%(const int lhs, const aint& rhs) {
     aint quot;
     aint rem;
     rhs.impl_->operatorDivide(aint(lhs), rhs, quot, rem);
-    return(quot);
+    return(rem);
 }
-const aint operator/(const long int lhs, const aint& rhs) {
+const aint operator%(const long int lhs, const aint& rhs) {
     aint quot;
     aint rem;
     rhs.impl_->operatorDivide(aint(lhs), rhs, quot, rem);
-    return(quot);
+    return(rem);
 }
-const aint operator/(const long long int lhs, const aint& rhs) {
+const aint operator%(const long long int lhs, const aint& rhs) {
     aint quot;
     aint rem;
     rhs.impl_->operatorDivide(aint(lhs), rhs, quot, rem);
-    return(quot);
+    return(rem);
 }
-const aint operator/(const unsigned int lhs, const aint& rhs) {
+const aint operator%(const unsigned int lhs, const aint& rhs) {
     aint quot;
     aint rem;
     rhs.impl_->operatorDivide(aint(lhs), rhs, quot, rem);
-    return(quot);
+    return(rem);
 }
-const aint operator/(const unsigned long int lhs, const aint& rhs) {
+const aint operator%(const unsigned long int lhs, const aint& rhs) {
     aint quot;
     aint rem;
     rhs.impl_->operatorDivide(aint(lhs), rhs, quot, rem);
-    return(quot);
+    return(rem);
 }
-const aint operator/(const unsigned long long int lhs, const aint& rhs) {
+const aint operator%(const unsigned long long int lhs, const aint& rhs) {
     aint quot;
     aint rem;
     rhs.impl_->operatorDivide(aint(lhs), rhs, quot, rem);
-    return(quot);
-}
-
-const aint::adiv aint::div(const aint& rhs) const {
-    std::pair<aint,aint> res;
-    this->impl_->operatorDivide(*this, rhs, res.first, res.second);
-    return(res);
+    return(rem);
 }
 
 } // end of namespace astd

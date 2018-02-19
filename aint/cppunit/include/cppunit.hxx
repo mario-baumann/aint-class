@@ -63,6 +63,7 @@ public:
     void testOperatorMinus();
     void testOperatorTimes();
     void testOperatorDivide();
+    void testOperatorModulo();
     void testOperatorIncrement();
     void testOperatorDecrement();
     void testOperatorCompoundAssignmentPlus();
@@ -82,6 +83,7 @@ public:
         suiteOfTests->addTest(new CppUnit::TestCaller<aintTest>("testMinus", &aintTest::testOperatorMinus));
         suiteOfTests->addTest(new CppUnit::TestCaller<aintTest>("testTimes", &aintTest::testOperatorTimes));
         suiteOfTests->addTest(new CppUnit::TestCaller<aintTest>("testDivide", &aintTest::testOperatorDivide));
+        suiteOfTests->addTest(new CppUnit::TestCaller<aintTest>("testModulo", &aintTest::testOperatorModulo));
         suiteOfTests->addTest(new CppUnit::TestCaller<aintTest>("testIncrement", &aintTest::testOperatorIncrement));
         suiteOfTests->addTest(new CppUnit::TestCaller<aintTest>("testDecrement", &aintTest::testOperatorDecrement));
         suiteOfTests->addTest(new CppUnit::TestCaller<aintTest>("testCompoundAssignmentPlus", &aintTest::testOperatorCompoundAssignmentPlus));
