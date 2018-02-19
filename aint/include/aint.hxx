@@ -288,6 +288,17 @@ public:
     aint& operator+=(const intUL  i);
     aint& operator+=(const intULL i);
 
+    // compound assignment operator(s) -=
+    aint& operator-=(const aint&  rhs);
+    aint& operator-=(const char*        s);
+    aint& operator-=(const std::string& s);
+    aint& operator-=(const int    i);
+    aint& operator-=(const intL   i);
+    aint& operator-=(const intLL  i);
+    aint& operator-=(const intU   i);
+    aint& operator-=(const intUL  i);
+    aint& operator-=(const intULL i);
+
     // divide and modulo operator(s)
     typedef std::pair<aint, aint> adiv;
     const adiv div(const aint& rhs) const; // computes quotient and remainder simultaneously

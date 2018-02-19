@@ -26,18 +26,18 @@
 // aint unit tests
 #include "cppunit.hxx"
 
-void aintTest::testOperatorCompoundAssignment()
+void aintTest::testOperatorCompoundAssignmentMinus()
 {
-    *a1 = 1; CPPUNIT_ASSERT( (*a1 += aint(1)) == 2 );
-    *a1 = 1; CPPUNIT_ASSERT( (*a1 += "1")  == 2 );
-    *a1 = 1; CPPUNIT_ASSERT( (*a1 += std::string("1")) == 2 );
-    *a1 = 1; CPPUNIT_ASSERT( (*a1 += 1)    == 2 );
-    *a1 = 1; CPPUNIT_ASSERT( (*a1 += 1L)   == 2 );
-    *a1 = 1; CPPUNIT_ASSERT( (*a1 += 1LL)  == 2 );
-    *a1 = 1; CPPUNIT_ASSERT( (*a1 += 1U)   == 2 );
-    *a1 = 1; CPPUNIT_ASSERT( (*a1 += 1UL)  == 2 );
-    *a1 = 1; CPPUNIT_ASSERT( (*a1 += 1ULL) == 2 );
-    *a1 = 1; CPPUNIT_ASSERT( ((*a1 += "1") += "2") == 4 );
+    *a1 = 3; CPPUNIT_ASSERT( (*a1 -= aint(1)) == 2 );
+    *a1 = 3; CPPUNIT_ASSERT( (*a1 -= "1")  == 2 );
+    *a1 = 3; CPPUNIT_ASSERT( (*a1 -= std::string("1")) == 2 );
+    *a1 = 3; CPPUNIT_ASSERT( (*a1 -= 1)    == 2 );
+    *a1 = 3; CPPUNIT_ASSERT( (*a1 -= 1L)   == 2 );
+    *a1 = 3; CPPUNIT_ASSERT( (*a1 -= 1LL)  == 2 );
+    *a1 = 3; CPPUNIT_ASSERT( (*a1 -= 1U)   == 2 );
+    *a1 = 3; CPPUNIT_ASSERT( (*a1 -= 1UL)  == 2 );
+    *a1 = 3; CPPUNIT_ASSERT( (*a1 -= 1ULL) == 2 );
+    *a1 = 7; CPPUNIT_ASSERT( ((*a1 -= "1") -= "2") == 4 );
 }
 
 // eof

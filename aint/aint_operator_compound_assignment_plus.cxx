@@ -24,7 +24,7 @@
  **************************************************************************/
 
 // arbitrary long integer
-// aint_operator_compound_assignment.cxx (compound assignment operators)
+// aint_operator_compound_assignment_plus.cxx (compound assignment operators +=)
 
 #include "impl.hxx"
 
@@ -88,3 +88,4 @@ aint& aint::operator+=(const unsigned long long int i) {
 }
 
 } // end of namespace astd
+
