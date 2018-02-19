@@ -68,6 +68,9 @@ public:
     void testOperatorDecrement();
     void testOperatorCompoundAssignmentPlus();
     void testOperatorCompoundAssignmentMinus();
+    void testOperatorCompoundAssignmentTimes();
+    void testOperatorCompoundAssignmentDivide();
+    void testOperatorCompoundAssignmentModulo();
     void testFibonacci();
     static CppUnit::TestSuite *suite() {
         CppUnit::TestSuite *suiteOfTests = new CppUnit::TestSuite("aintTest");
@@ -88,6 +91,9 @@ public:
         suiteOfTests->addTest(new CppUnit::TestCaller<aintTest>("testDecrement", &aintTest::testOperatorDecrement));
         suiteOfTests->addTest(new CppUnit::TestCaller<aintTest>("testCompoundAssignmentPlus", &aintTest::testOperatorCompoundAssignmentPlus));
         suiteOfTests->addTest(new CppUnit::TestCaller<aintTest>("testCompoundAssignmentMinus", &aintTest::testOperatorCompoundAssignmentMinus));
+        suiteOfTests->addTest(new CppUnit::TestCaller<aintTest>("testCompoundAssignmentTimes", &aintTest::testOperatorCompoundAssignmentTimes));
+        suiteOfTests->addTest(new CppUnit::TestCaller<aintTest>("testCompoundAssignmentDivide", &aintTest::testOperatorCompoundAssignmentDivide));
+        suiteOfTests->addTest(new CppUnit::TestCaller<aintTest>("testCompoundAssignmentModulo", &aintTest::testOperatorCompoundAssignmentModulo));
         suiteOfTests->addTest(new CppUnit::TestCaller<aintTest>("testFibonacci", &aintTest::testFibonacci));
         return(suiteOfTests);
     }
