@@ -92,5 +92,9 @@ aint aint::power(const aint& exp) {
     return(this->impl_->operatorPower(*this, exp));
 }
 
+aint aint::powertower(const aint& ord) {
+    return(this->impl_->operatorPowerTower(*this, ord));
+}
+
 
 } // end of namespace astd

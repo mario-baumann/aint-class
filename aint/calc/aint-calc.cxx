@@ -85,6 +85,7 @@ namespace client {
             case '/': stck.push(a1 / a2); break;
             case '%': stck.push(a1 % a2); break;
             case '^': stck.push(a1.power(a2)); break;
+            case 127: stck.push(a1.powertower(a2)); break;
             }
             if (dbg) {
                 cout << __FUNCTION__ << ": " << stck.top() << " ( " << a1 << " " << op << " " << a2 << " ) " << endl;
@@ -96,6 +97,7 @@ namespace client {
         void do_div() { do_op2('/'); }
         void do_mod() { do_op2('%'); }
         void do_pow() { do_op2('^'); }
+        void do_ptw() { do_op2(127); }
     }
 
     // calculator grammar
@@ -116,7 +118,8 @@ namespace client {
                 ;
 
             factor =
-                primary >> -( ('^' >> factor [&do_pow]) )
+                primary >> -( ("^^" >> factor [&do_ptw]) | 
+                              ('^'  >> factor [&do_pow]) )
                 ;
 
             /* lexeme[ (+digit_) [&do_int] ] | */

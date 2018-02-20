@@ -355,6 +355,8 @@ public:
     aint factorial();
     //! computes the power
     aint power(const aint& exp);
+    //! computes the power tower
+    aint powertower(const aint& ord);
 
 private:
     // use pimpl idiom

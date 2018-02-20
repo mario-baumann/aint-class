@@ -74,4 +74,26 @@ aint aint::impl::operatorPower(const aint& base, const aint& exp) const {
     }
 }
 
+aint aint::impl::operatorPowerTower(const aint& base, const aint& ord) const {
+    // compute base^^ord, where ^^ is the double arrow operator
+    // see also https://en.wikipedia.org/wiki/Knuth%27s_up-arrow_notation
+    //          https://en.wikipedia.org/wiki/Tetration
+    if (ord < 0) {
+        return(aint(0));
+    } else if (ord == 0) {
+        return(aint(1));
+    } else if (ord == 1) {
+        return(base);
+    } else {
+        aint ret = base;
+        aint order = ord;
+	while (order > 1) {
+	    ret = aint::impl::operatorPower(base, ret);
+	    --order;
+	}
+	return(ret);
+    }
+}
+
+
 } // end of namespace astd

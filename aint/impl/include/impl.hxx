@@ -123,6 +123,7 @@ public:
     void operatorDivide(const aint& lhs, const aint& rhs, aint& quot, aint& rem) const;
 
     aint operatorPower(const aint& base, const aint& exp) const;
+    aint operatorPowerTower(const aint& base, const aint& ord) const;
 
     aint factorialIterative(const aint& n) const;
     aint factorialRecursiveProduct(const aint& start, const aint& width) const;
