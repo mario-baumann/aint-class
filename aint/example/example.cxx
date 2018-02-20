@@ -39,6 +39,7 @@ const char* typeidStr() {
     if (typeid(T) == typeid(int16_t)) return("int16");
     if (typeid(T) == typeid(int32_t)) return("int32");
     if (typeid(T) == typeid(int64_t)) return("int64");
+    return("fixme");
 }
 
 template<typename T>

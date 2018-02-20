@@ -55,16 +55,25 @@ int aint::digits() const {
     size_t dim = this->impl_->data_.size();
     aint::impl::singleComp t = this->impl_->data_[dim - 1];
     int d = aint::impl::C_SINGLE_COMP_WIDTH * (dim - 1);
+    //
     if (t < 10) return(d + 1);
     if (t < 100) return(d + 2);
+#if defined(SINGLE_8)
+    return(d + 3);
+#else
     if (t < 1000) return(d + 3);
     if (t < 10000) return(d + 4);
+#if defined(SINGLE_16)
+    return(d + 5);
+#else
     if (t < 100000) return(d + 5);
     if (t < 1000000) return(d + 6);
     if (t < 10000000) return(d + 7);
     if (t < 100000000) return(d + 8);
     if (t < 1000000000) return(d + 9);
     return(d + 10);
+#endif
+#endif
 }
 
 bool aint::even() const {

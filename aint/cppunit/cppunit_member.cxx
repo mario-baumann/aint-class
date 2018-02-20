@@ -43,6 +43,9 @@ void aintTest::testMember() {
     CPPUNIT_ASSERT( aint(  10000000).digits() == 8 );
     CPPUNIT_ASSERT( aint( 100000000).digits() == 9 );
     CPPUNIT_ASSERT( aint(1000000000).digits() == 10 );
+    CPPUNIT_ASSERT( aint("10000000000").digits() == 11 );
+    CPPUNIT_ASSERT( aint("100000000000").digits() == 12 );
+    CPPUNIT_ASSERT( aint("1000000000000").digits() == 13 );
     CPPUNIT_ASSERT( aint("354224848179261915075").digits() == 21 );
 
     CPPUNIT_ASSERT( aint( 0).factorial() == 1 );
