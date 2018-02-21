@@ -51,6 +51,17 @@ namespace client {
     //  Semantic actions
     ///////////////////////////////////////////////////////////////////////////////
     namespace {
+        enum opType {
+            PLUS,
+            MINUS,
+            TIMES,
+            DIVIDE,
+            MODULO,
+            FACTORIAL,
+            DIGITS,
+            POWER,
+            POWER_TOWER
+        };
         void do_int(std::vector<char> s) {
             s.push_back('\0');
             aint a(string(s.data()));
@@ -59,45 +70,47 @@ namespace client {
                 cout << __FUNCTION__ << ": " << stck.top() << " integer" << endl;
             }
         }
-        void do_op1(char op) {
+        void do_op1(opType op) {
             aint a1 = stck.top(); stck.pop();
             switch (op) {
-            case '+': stck.push(+a1); break;
-            case '-': stck.push(-a1); break;
-            case '!': stck.push(a1.factorial()); break;
-            case '#': stck.push(a1.digits()); break;
+            default:
+            case PLUS: stck.push(+a1); break;
+            case MINUS: stck.push(-a1); break;
+            case FACTORIAL: stck.push(a1.factorial()); break;
+            case DIGITS: stck.push(a1.digits()); break;
             }
             if (dbg) {
                 cout << __FUNCTION__ << ": " << stck.top() << " ( " << op << a1 << ")" << endl;
             }
         }
-        void do_pos() { do_op1('+'); }
-        void do_neg() { do_op1('-'); }
-        void do_fac() { do_op1('!'); }
-        void do_dig() { do_op1('#'); }
-        void do_op2(char op) {
+        void do_pos() { do_op1(PLUS); }
+        void do_neg() { do_op1(MINUS); }
+        void do_fac() { do_op1(FACTORIAL); }
+        void do_dig() { do_op1(DIGITS); }
+        void do_op2(opType op) {
             aint a2 = stck.top(); stck.pop();
             aint a1 = stck.top(); stck.pop();
             switch (op) {
-            case '+': stck.push(a1 + a2); break;
-            case '-': stck.push(a1 - a2); break;
-            case '*': stck.push(a1 * a2); break;
-            case '/': stck.push(a1 / a2); break;
-            case '%': stck.push(a1 % a2); break;
-            case '^': stck.push(a1.power(a2)); break;
-            case 127: stck.push(a1.powertower(a2)); break;
+            default:
+            case PLUS: stck.push(a1 + a2); break;
+            case MINUS: stck.push(a1 - a2); break;
+            case TIMES: stck.push(a1 * a2); break;
+            case DIVIDE: stck.push(a1 / a2); break;
+            case MODULO: stck.push(a1 % a2); break;
+            case POWER: stck.push(a1.power(a2)); break;
+            case POWER_TOWER: stck.push(a1.powertower(a2)); break;
             }
             if (dbg) {
                 cout << __FUNCTION__ << ": " << stck.top() << " ( " << a1 << " " << op << " " << a2 << " ) " << endl;
             }
         }
-        void do_add() { do_op2('+'); }
-        void do_sub() { do_op2('-'); }
-        void do_mul() { do_op2('*'); }
-        void do_div() { do_op2('/'); }
-        void do_mod() { do_op2('%'); }
-        void do_pow() { do_op2('^'); }
-        void do_ptw() { do_op2(127); }
+        void do_add() { do_op2(PLUS); }
+        void do_sub() { do_op2(MINUS); }
+        void do_mul() { do_op2(TIMES); }
+        void do_div() { do_op2(DIVIDE); }
+        void do_mod() { do_op2(MODULO); }
+        void do_pow() { do_op2(POWER); }
+        void do_ptw() { do_op2(POWER_TOWER); }
     }
 
     // calculator grammar
@@ -122,7 +135,6 @@ namespace client {
                               ('^'  >> factor [&do_pow]) )
                 ;
 
-            /* lexeme[ (+digit_) [&do_int] ] | */
             primary =
                 (+digit_) [&do_int]         |
                 '(' >> expression >> ')'    |
