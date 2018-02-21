@@ -27,6 +27,11 @@
 #include "cppunit.hxx"
 
 void aintTest::testMember() {
+ 
+    CPPUNIT_ASSERT( aint(0).even() == 1 );
+    CPPUNIT_ASSERT( aint(1).even() == 0 );
+    CPPUNIT_ASSERT( aint(2).even() == 1 );
+    CPPUNIT_ASSERT( aint(3).even() == 0 );
 
     CPPUNIT_ASSERT( aint(        -1).digits() == 1 );
     CPPUNIT_ASSERT( aint(         0).digits() == 1 );
@@ -54,6 +59,21 @@ void aintTest::testMember() {
     CPPUNIT_ASSERT( aint( 20).factorial() == 2432902008176640000_A );
     CPPUNIT_ASSERT( aint( 21).factorial() == 51090942171709440000_A );
     CPPUNIT_ASSERT( aint(100).factorial() == 93326215443944152681699238856266700490715968264381621468592963895217599993229915608941463976156518286253697920827223758251185210916864000000000000000000000000_A );
+
+    CPPUNIT_ASSERT( aint(2).power(-1) == 0 );
+    CPPUNIT_ASSERT( aint(2).power(0) == 1 );
+    CPPUNIT_ASSERT( aint(2).power(1) == 2 );
+    CPPUNIT_ASSERT( aint(2).power(2) == 4 );
+    CPPUNIT_ASSERT( aint(2).power(3) == 8 );
+    CPPUNIT_ASSERT( aint(2).power(100) == 1267650600228229401496703205376_A );
+    CPPUNIT_ASSERT( aint(2).power(101) == 2535301200456458802993406410752_A );
+
+    CPPUNIT_ASSERT( aint(2).powertower(-1) == 0 );
+    CPPUNIT_ASSERT( aint(2).powertower(0) == 1 );
+    CPPUNIT_ASSERT( aint(2).powertower(1) == 2 );
+    CPPUNIT_ASSERT( aint(2).powertower(2) == 4 );
+    CPPUNIT_ASSERT( aint(2).powertower(3) == 16 );
+    CPPUNIT_ASSERT( aint(4).powertower(3) == 13407807929942597099574024998205846127479365820592393377723561443721764030073546976801874298166903427690031858186486050853753882811946569946433649006084096_A );
 }
 
 // eof
