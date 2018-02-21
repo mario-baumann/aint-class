@@ -33,7 +33,7 @@
 #include <vector>  // std::vector
 #include <iostream>
 
-#if ! defined(SINGLE_8) || ! defined(SINGLE_16) || ! defined(SINGLE_32)
+#if ! defined(SINGLE_8) && ! defined(SINGLE_16) && ! defined(SINGLE_32)
 #define SINGLE_16
 #endif
 
