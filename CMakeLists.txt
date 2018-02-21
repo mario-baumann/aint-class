@@ -31,6 +31,8 @@ project(aint CXX)
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMakeModules)
 
+add_definitions(-DSINGLE_${AINT_SINGLE_SIZE})
+
 add_subdirectory(aint)
 
 # add a target to generate API documentation with Doxygen 

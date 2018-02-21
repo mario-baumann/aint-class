@@ -83,7 +83,8 @@ run_cmake \
     -G "Eclipse CDT4 - Unix Makefiles" \
     -D "CMAKE_BUILD_TYPE=${BUILD_TYPE}" \
     -D "_ECLIPSE_VERSION=4.3" \
-    -D "CMAKE_CXX_COMPILER_ARG1=-std=c++11 -DSINGLE_${SINGLE_SIZE}" \
+    -D "AINT_SINGLE_SIZE=${SINGLE_SIZE}" \
+    -D "CMAKE_CXX_COMPILER_ARG1=-std=c++11" \
     -D "CMAKE_ECLIPSE_MAKE_ARGUMENTS=-j4 --no-print-directory" \
     -D "CMAKE_INSTALL_PREFIX=$(pwd)/install" \
     ${SOURCE_DIR}
