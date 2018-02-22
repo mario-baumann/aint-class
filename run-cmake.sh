@@ -79,6 +79,19 @@ if [ ! -d ${SOURCE_DIR} ]; then
     exit 1
 fi
 
+case $(uname -s) in
+_CYGWIN*)
+    CXX="$(which x86_64-w64-mingw32-g++.exe)"
+    if [ "_${CXX}" != "_" ]; then
+        export ${CXX}
+    fi
+    BOOST_ROOT="/usr/x86_64-w64-mingw32/sys-root/mingw"
+    if [ -d ${BOOST_ROOT} ]; then
+        export ${BOOST_ROOT}
+    fi
+    ;;
+esac
+
 run_cmake \
     -G "Eclipse CDT4 - Unix Makefiles" \
     -D "CMAKE_BUILD_TYPE=${BUILD_TYPE}" \

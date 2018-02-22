@@ -33,6 +33,10 @@ file(GLOB CxxImplFiles "impl/*.cxx")
 add_library(aint
     SHARED ${HxxFiles} ${HxxImplFiles} ${CxxFiles} ${CxxImplFiles}
 )
+if(MINGW)
+    set_target_properties(aint PROPERTIES PREFIX "" IMPORT_PREFIX "")
+endif()
+
 add_library(aint-static
     ${HxxFiles} ${HxxImplFiles} ${CxxFiles} ${CxxImplFiles}
 )

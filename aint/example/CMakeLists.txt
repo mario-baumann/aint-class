@@ -28,7 +28,7 @@
 file(GLOB CxxFiles "*.cxx")
 
 add_executable(aint-example ${CxxFiles})
-target_link_libraries(aint-example aint)
+target_link_libraries(aint-example aint-static)
 
 # add run-aint-example target to run aint example
 add_custom_target(run-aint-example ALL
