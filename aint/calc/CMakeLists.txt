@@ -26,7 +26,7 @@
 # aint-calc 
 find_package(Boost 1.53)
 if (Boost_FOUND)
-    include_directories(${Boost_INCLUDE_DIR})
+    include_directories(${Boost_INCLUDE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/include)
     add_executable(aint-calc aint-calc.cxx)
     target_link_libraries(aint-calc aint-static)
     install(TARGETS aint-calc
