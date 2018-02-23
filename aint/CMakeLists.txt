@@ -31,6 +31,9 @@ add_library(aint SHARED ${Sources})
 if(MINGW)
     set_target_properties(aint PROPERTIES PREFIX "" IMPORT_PREFIX "")
 endif()
+if(UNIX AND NOT APPLE)
+    set_target_properties(aint PROPERTIES LINK_FLAGS "-Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/aint_export_linux.txt")
+endif()
 
 add_library(aint-static ${Sources})
 
