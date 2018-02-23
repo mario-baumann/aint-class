@@ -23,30 +23,14 @@
  #
  ###########################################################################
 
-# aint cppunit - cmake
+# aint calc cppunit - cmake
 
-file(GLOB Sources "*.cxx" "include/*.hxx")
-if (NOT Boost_FOUND)
-    file(GLOB DummySources "dummy/*.cxx")
-endif()
+file(GLOB Sources "*.cxx" )
 
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}/include")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../../cppunit/include")
 include_directories("${CPPUNIT_INCLUDE_DIR}")
 
-add_executable(aint-unit ${Sources} ${DummySources})
-if (Boost_FOUND)
-    target_link_libraries(aint-unit aint-static aint-calc-unit)
-endif()
-target_link_libraries(aint-unit aint-static)
-target_link_libraries(aint-unit ${CPPUNIT_LIBRARY})
-
-# add run-aint-unit target to run unit tests
-add_custom_target(run-aint-unit ALL
-    ./cppunit/aint-unit 
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/../
-    COMMENT "Running aint unit test" VERBATIM
-)
-add_dependencies(run-aint-unit aint-unit)
+add_library(aint-calc-unit ${Sources})
 
 # eof
 

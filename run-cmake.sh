@@ -79,15 +79,15 @@ if [ ! -d ${SOURCE_DIR} ]; then
     exit 1
 fi
 
-case $(uname -s) in
+case '_'$(uname -s) in
 _CYGWIN*)
     CXX="$(which x86_64-w64-mingw32-g++.exe)"
     if [ "_${CXX}" != "_" ]; then
-        export ${CXX}
+        export CXX
     fi
     BOOST_ROOT="/usr/x86_64-w64-mingw32/sys-root/mingw"
     if [ -d ${BOOST_ROOT} ]; then
-        export ${BOOST_ROOT}
+        export BOOST_ROOT
     fi
     ;;
 esac

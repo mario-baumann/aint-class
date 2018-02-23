@@ -25,21 +25,14 @@
 
 # aint library - cmake
 
-file(GLOB HxxFiles "include/*.hxx")
-file(GLOB HxxImplFiles "impl/include/*.hxx")
-file(GLOB CxxFiles "*.cxx")
-file(GLOB CxxImplFiles "impl/*.cxx")
+file(GLOB Sources "*.cxx" "impl/*.cxx" "include/*.hxx" "impl/include/*.hxx")
 
-add_library(aint
-    SHARED ${HxxFiles} ${HxxImplFiles} ${CxxFiles} ${CxxImplFiles}
-)
+add_library(aint SHARED ${Sources})
 if(MINGW)
     set_target_properties(aint PROPERTIES PREFIX "" IMPORT_PREFIX "")
 endif()
 
-add_library(aint-static
-    ${HxxFiles} ${HxxImplFiles} ${CxxFiles} ${CxxImplFiles}
-)
+add_library(aint-static ${Sources})
 
 include_directories(
     "${CMAKE_CURRENT_SOURCE_DIR}/include"
@@ -69,11 +62,17 @@ install(TARGETS aint-static
     ARCHIVE DESTINATION "${INSTALL_LIB_DIR}" COMPONENT lib
 )
 
+find_package(Boost 1.53)
 find_package(CppUnit)
+
+if (Boost_FOUND)
+    add_subdirectory(calc)
+endif()
+
 if (CPPUNIT_FOUND)
     add_subdirectory(cppunit)
 endif()
+
 add_subdirectory(example)
-add_subdirectory(calc)
 
 # eof

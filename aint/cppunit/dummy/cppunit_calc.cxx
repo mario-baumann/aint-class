@@ -23,41 +23,11 @@
  *
  **************************************************************************/
 
-// aint unit tests for calc
+// aint unit tests for calc (dummy if boost is not avialable)
 
 #include "cppunit.hxx"
-#include <iostream>
-#include "../calc/include/aint_calc.hxx"
-
-static const aint passingFailed(-1234567890_A);
-
-static const aint& testCalcHelper(std::string input) {
-    typedef std::string::const_iterator iterator_type;
-    typedef client::calculator<iterator_type> calculator;
-    boost::spirit::ascii::space_type space; // Our skipper
-    calculator calc; // Our grammar
-
-    auto iter = input.cbegin();
-    auto end = input.cend();
-    bool r = phrase_parse(iter, end, calc, space);
-    if (r && iter == end) {
-	return (client::stck.top()); // passed
-    }
-
-    // error handling
-    std::string rest(iter, end);
-    std::cout << "Parsing of '" << input << "' failed (stopped at '" << rest << "')!" << std::endl;
-    return (passingFailed);
-}
 
 void aintTest::testCalc() {
-
-    CPPUNIT_ASSERT( testCalcHelper("1") == 1 );
-    CPPUNIT_ASSERT( testCalcHelper("1+0") == 1 );
-    CPPUNIT_ASSERT( testCalcHelper("1+1") == 2 );
-    CPPUNIT_ASSERT( testCalcHelper("1-1") == 0 );
-    CPPUNIT_ASSERT( testCalcHelper("1-2") == -1 );
-    CPPUNIT_ASSERT( testCalcHelper("1-2*3") == -5 );
 }
 
 // eof

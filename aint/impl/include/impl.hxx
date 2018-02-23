@@ -34,7 +34,7 @@
 #include <iostream>
 
 #if ! defined(SINGLE_8) && ! defined(SINGLE_16) && ! defined(SINGLE_32)
-#define SINGLE_16
+#define SINGLE_32
 #endif
 
 namespace astd {

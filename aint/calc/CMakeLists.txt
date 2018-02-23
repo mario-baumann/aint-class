@@ -24,15 +24,24 @@
  ###########################################################################
 
 # aint-calc 
-find_package(Boost 1.53)
-if (Boost_FOUND)
-    include_directories(${Boost_INCLUDE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/include)
-    add_executable(aint-calc aint-calc.cxx)
-    target_link_libraries(aint-calc aint-static)
-    install(TARGETS aint-calc
-        # IMPORTANT: Add the aint-calc executable to the "export-set"
-        EXPORT aintTargets
-        RUNTIME DESTINATION "${INSTALL_BIN_DIR}" COMPONENT bin
-    )
+
+file(GLOB Sources "*.cxx" "include/*.hxx")
+
+include_directories(${Boost_INCLUDE_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+add_executable(aint-calc ${Sources})
+target_link_libraries(aint-calc aint-static)
+install(TARGETS aint-calc
+    # IMPORTANT: Add the aint-calc executable to the "export-set"
+    EXPORT aintTargets
+    RUNTIME DESTINATION "${INSTALL_BIN_DIR}" COMPONENT bin
+)
+
+if (CPPUNIT_FOUND)
+    add_subdirectory(cppunit)
 endif()
-#
+
+
+# eof
+
