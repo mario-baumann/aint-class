@@ -23,6 +23,10 @@
 # (See accompanying file LICENSE_1_0.txt or copy at
 # http://www.boost.org/LICENSE_1_0.txt)
 
+if (NOT "$ENV{CPPUNIT_ROOT}" STREQUAL "")
+   set(CPPUNIT_ROOT_DIR $ENV{CPPUNIT_ROOT})
+endif()
+
 set(CPPUNIT_ROOT_DIR
 	"${CPPUNIT_ROOT_DIR}"
 	CACHE
@@ -31,15 +35,17 @@ set(CPPUNIT_ROOT_DIR
 
 find_library(CPPUNIT_LIBRARY_RELEASE
 	NAMES
+	libcppunit.a
 	cppunit
 	HINTS
-	"${CPPUNIT_ROOT_DIR}")
+	"${CPPUNIT_ROOT_DIR}/lib")
 
 find_library(CPPUNIT_LIBRARY_DEBUG
 	NAMES
+	libcppunitd.a
 	cppunitd
 	HINTS
-	"${CPPUNIT_ROOT_DIR}")
+	"${CPPUNIT_ROOT_DIR}/lib")
 
 include(SelectLibraryConfigurations)
 select_library_configurations(CPPUNIT)

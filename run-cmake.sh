@@ -42,6 +42,7 @@ if [ "_$1" = "_" ]; then
     echo "Options:"
     echo "    -r ..... Release build (default)"
     echo "    -d ..... Debug build"
+    echo "    -32 .... Enables 32bit build"
     echo "    -i8 .... Uses int size  8 for single component"
     echo "    -i16 ... Uses int size 16 for single component"
     echo "    -i32 ... Uses int size 32 for single component"
@@ -49,6 +50,7 @@ if [ "_$1" = "_" ]; then
 fi
 
 BUILD_TYPE="Release"
+ARCH="64"
 while [ $# -gt 0 ]
 do
     case '_'$1 in
@@ -57,6 +59,9 @@ do
         ;;
     _-d)
         BUILD_TYPE="Debug"
+        ;;
+    _-32)
+        ARCH="32"
         ;;
     _-i8)
         SINGLE_SIZE="8"
@@ -81,23 +86,21 @@ fi
 
 case '_'$(uname -s) in
 _CYGWIN*)
-    CXX="$(which x86_64-w64-mingw32-g++.exe)"
-    if [ "_${CXX}" != "_" ]; then
-        export CXX
+    TARGET_TRIPLE="x86_64-w64-mingw32"
+    if [ "$ARCH" -eq 32 ]; then
+        TARGET_TRIPLE="i686-w64-mingw32"
     fi
-    BOOST_ROOT="/usr/x86_64-w64-mingw32/sys-root/mingw"
-    if [ -d ${BOOST_ROOT} ]; then
-        export BOOST_ROOT
-    fi
+    TOOLCHAIN="-D CMAKE_TOOLCHAIN_FILE=${SOURCE_DIR}/CMakeModules/Toolchain-${TARGET_TRIPLE}.cmake"
     ;;
 esac
 
 run_cmake \
     -G "Eclipse CDT4 - Unix Makefiles" \
+    ${TOOLCHAIN} \
     -D "CMAKE_BUILD_TYPE=${BUILD_TYPE}" \
     -D "_ECLIPSE_VERSION=4.3" \
     -D "AINT_SINGLE_SIZE=${SINGLE_SIZE}" \
-    -D "CMAKE_CXX_COMPILER_ARG1=-std=c++11" \
+    -D "CMAKE_CXX_COMPILER_ARG1=-std=c++11 -m${ARCH}" \
     -D "CMAKE_ECLIPSE_MAKE_ARGUMENTS=-j4 --no-print-directory" \
     -D "CMAKE_INSTALL_PREFIX=$(pwd)/install" \
     ${SOURCE_DIR}
