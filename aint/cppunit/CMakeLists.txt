@@ -35,7 +35,7 @@ include_directories("${CPPUNIT_INCLUDE_DIR}")
 
 add_executable(aint-unit ${Sources} ${DummySources})
 if (Boost_FOUND)
-    target_link_libraries(aint-unit aint-static aint-calc-unit)
+    target_link_libraries(aint-unit aint-calc-unit)
 endif()
 target_link_libraries(aint-unit aint-static)
 target_link_libraries(aint-unit ${CPPUNIT_LIBRARY})

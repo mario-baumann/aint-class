@@ -23,7 +23,37 @@
  #
  ###########################################################################
 
+
 # aint library - cmake
+
+add_definitions(-DSINGLE_${AINT_SINGLE_SIZE})
+
+set(TARGET_LIBS "")
+if(MINGW)
+    # get static c++/pthread libraries via C++ compiler
+    if (${CMAKE_CXX_COMPILER_ARG1} MATCHES "-m32")
+        set(ARCH "-m32")
+    else()
+        set(ARCH "-m64")
+    endif()
+    execute_process(
+        COMMAND ${CMAKE_CXX_COMPILER} ${ARCH} -print-file-name=libstdc++.a
+        OUTPUT_VARIABLE LIBSTDCXX_A
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+    execute_process(
+        COMMAND ${CMAKE_CXX_COMPILER} ${ARCH} -print-file-name=libpthread.a
+        OUTPUT_VARIABLE LIBPTHREAD_A
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+    
+    # set global target libraries
+    set(TARGET_LIBS "${LIBSTDCXX_A};${LIBPTHREAD_A}")
+endif()
+
+# set linker flags for executables and shared libraris
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-libstdc++")
+set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -static-libgcc -static-libstdc++")
 
 file(GLOB Sources "*.cxx" "impl/*.cxx" "include/*.hxx" "impl/include/*.hxx")
 
@@ -33,6 +63,9 @@ if(MINGW)
 endif()
 if(UNIX AND NOT APPLE)
     set_target_properties(aint PROPERTIES LINK_FLAGS "-Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/aint_export_linux.txt")
+endif()
+if(NOT "${TARGET_LIBS}" STREQUAL "")
+    target_link_libraries(aint ${TARGET_LIBS})
 endif()
 
 add_library(aint-static ${Sources})

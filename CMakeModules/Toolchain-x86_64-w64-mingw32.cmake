@@ -9,9 +9,9 @@ set(CMAKE_SYSTEM_NAME Windows)
 set(TOOLCHAIN_PREFIX x86_64-w64-mingw32)
 
 # cross compilers to use for C and C++
-set(CMAKE_C_COMPILER ${TOOLCHAIN_PREFIX}-gcc)
-set(CMAKE_CXX_COMPILER ${TOOLCHAIN_PREFIX}-g++)
-set(CMAKE_RC_COMPILER ${TOOLCHAIN_PREFIX}-windres)
+set(CMAKE_C_COMPILER   "/usr/bin/${TOOLCHAIN_PREFIX}-gcc.exe")
+set(CMAKE_CXX_COMPILER "/usr/bin/${TOOLCHAIN_PREFIX}-g++.exe")
+set(CMAKE_RC_COMPILER  "/usr/bin/${TOOLCHAIN_PREFIX}-windres.exe")
 
 # target environment on the build host system
 #   set 1st to dir with the cross compiler's C/C++ headers/libs
