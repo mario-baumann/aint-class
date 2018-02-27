@@ -29,6 +29,9 @@ file(GLOB Sources "*.cxx")
 
 add_executable(aint-example ${Sources})
 target_link_libraries(aint-example aint-static)
+if(NOT "${TARGET_LIBS}" STREQUAL "")
+    target_link_libraries(aint-example ${TARGET_LIBS})
+endif()
 
 # add run-aint-example target to run aint example
 add_custom_target(run-aint-example ALL

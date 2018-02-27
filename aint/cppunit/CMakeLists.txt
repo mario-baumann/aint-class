@@ -39,6 +39,9 @@ if (Boost_FOUND)
 endif()
 target_link_libraries(aint-unit aint-static)
 target_link_libraries(aint-unit ${CPPUNIT_LIBRARY})
+if(NOT "${TARGET_LIBS}" STREQUAL "")
+    target_link_libraries(aint-unit ${TARGET_LIBS})
+endif()
 
 # add run-aint-unit target to run unit tests
 add_custom_target(run-aint-unit ALL

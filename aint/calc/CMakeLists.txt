@@ -32,6 +32,10 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 add_executable(aint-calc ${Sources})
 target_link_libraries(aint-calc aint-static)
+if(NOT "${TARGET_LIBS}" STREQUAL "")
+    target_link_libraries(aint-calc ${TARGET_LIBS})
+endif()
+
 install(TARGETS aint-calc
     # IMPORTANT: Add the aint-calc executable to the "export-set"
     EXPORT aintTargets
