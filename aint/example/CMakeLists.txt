@@ -32,6 +32,8 @@ target_link_libraries(aint-example aint-static)
 if(NOT "${TARGET_LIBS}" STREQUAL "")
     target_link_libraries(aint-example ${TARGET_LIBS})
 endif()
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/example.cxx DESTINATION share/aint/example)
+install(PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/build.sh DESTINATION share/aint/example)
 
 # add run-aint-example target to run aint example
 add_custom_target(run-aint-example ALL

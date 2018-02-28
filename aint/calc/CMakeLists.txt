@@ -36,11 +36,7 @@ if(NOT "${TARGET_LIBS}" STREQUAL "")
     target_link_libraries(aint-calc ${TARGET_LIBS})
 endif()
 
-install(TARGETS aint-calc
-    # IMPORTANT: Add the aint-calc executable to the "export-set"
-    EXPORT aintTargets
-    RUNTIME DESTINATION "${INSTALL_BIN_DIR}" COMPONENT bin
-)
+install(TARGETS aint-calc DESTINATION bin)
 
 if (CPPUNIT_FOUND)
     add_subdirectory(cppunit)

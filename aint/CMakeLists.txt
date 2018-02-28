@@ -59,6 +59,12 @@ endif()
 
 file(GLOB Sources "*.cxx" "impl/*.cxx" "include/*.hxx" "impl/include/*.hxx")
 
+include_directories(
+    "${CMAKE_CURRENT_SOURCE_DIR}/include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/impl/include"
+)
+
+
 add_library(aint SHARED ${Sources})
 if(MINGW)
     set_target_properties(aint PROPERTIES PREFIX "" IMPORT_PREFIX "" LINK_FLAGS "${CMAKE_CURRENT_SOURCE_DIR}/aint_export_mingw.def")
@@ -68,36 +74,13 @@ endif()
 if(NOT "${TARGET_LIBS}" STREQUAL "")
     target_link_libraries(aint ${TARGET_LIBS})
 endif()
+set_target_properties(aint PROPERTIES PUBLIC_HEADER "include/aint.hxx")
+install(TARGETS aint DESTINATION lib PUBLIC_HEADER DESTINATION include)
+
 
 add_library(aint-static ${Sources})
+install(TARGETS aint-static DESTINATION lib)
 
-include_directories(
-    "${CMAKE_CURRENT_SOURCE_DIR}/include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/impl/include"
-)
-
-set_target_properties(aint
-    PROPERTIES PUBLIC_HEADER "include/aint.hxx"
-)
-
-set(INSTALL_BIN_DIR     ${CMAKE_INSTALL_PREFIX}/aint/bin     CACHE PATH "Installation directory for executables" )
-set(INSTALL_INCLUDE_DIR ${CMAKE_INSTALL_PREFIX}/aint/include CACHE PATH "Installation directory for header files")
-set(INSTALL_LIB_DIR     ${CMAKE_INSTALL_PREFIX}/aint/lib     CACHE PATH "Installation directory for libraries"   )
-set(INSTALL_CMAKE_DIR   ${CMAKE_INSTALL_PREFIX}/aint/cmake   CACHE PATH "Installation directory for cmake files" )
-
-install(TARGETS aint
-    # IMPORTANT: Add the aint library to the "export-set"
-    EXPORT aintTargets
-    ARCHIVE DESTINATION "${INSTALL_LIB_DIR}" COMPONENT lib
-    LIBRARY DESTINATION "${INSTALL_LIB_DIR}" COMPONENT lib
-    PUBLIC_HEADER DESTINATION "${INSTALL_INCLUDE_DIR}/aint"
-    COMPONENT dev
-)
-install(TARGETS aint-static
-    # IMPORTANT: Add the aint-static library to the "export-set"
-    EXPORT aintTargets
-    ARCHIVE DESTINATION "${INSTALL_LIB_DIR}" COMPONENT lib
-)
 
 find_package(Boost 1.53)
 find_package(CppUnit)
