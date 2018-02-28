@@ -67,7 +67,8 @@ include_directories(
 
 add_library(aint SHARED ${Sources})
 if(MINGW)
-    set_target_properties(aint PROPERTIES PREFIX "" IMPORT_PREFIX "" LINK_FLAGS "${CMAKE_CURRENT_SOURCE_DIR}/aint_export_mingw.def")
+    set_target_properties(aint PROPERTIES PREFIX "" IMPORT_PREFIX "" LINK_FLAGS "${CMAKE_CURRENT_SOURCE_DIR}/aint_export_mingw.def -Wl,--output-def=aint.def")
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/aint.def DESTINATION lib)
 elseif(UNIX AND NOT APPLE)
     set_target_properties(aint PROPERTIES LINK_FLAGS "-Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/aint_export_linux.txt")
 endif()
