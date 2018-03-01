@@ -9,16 +9,24 @@ function build_mingw
 
     CXX_LIB=$(${CXX} -print-file-name=libstdc++.a)
     PTH_LIB=$(${CXX} -print-file-name=libpthread.a)
-    DLL_PATH=$(cygpath -m ../../../lib/aint.dll)
-    DLL_PATH_MANGLE=$(echo ${DLL_PATH} | sed 's@/@_@g' | sed 's@:@_@')
-    DLL_PATH_DOS=$(echo ${DLL_PATH} | sed 's@/@\\\\@g')
-    echo ${DLL_PATH_MANGLE} | awk -v d=\" '{ print "LIBRARY " d $1 d }' > a.def
-    cat ../../../lib/aint.def >> a.def
-    ${DLLTOOL} --output-lib a.lib --input-def a.def
-    ${CXX} -o a.exe ${SOURCE} -std=c++11 -I ../../../include a.lib -static-libgcc ${CXX_LIB} ${PTH_LIB}
-    cat a.exe | sed "s@${DLL_PATH_MANGLE}@${DLL_PATH_DOS}@" > ${OUTPUT}
-    chmod 755 ${OUTPUT}
-    rm -f a.exe a.lib a.def
+
+    PATCH_EXE=0 # creates a windows executable which depends on an aint.dll in the same folder
+    PATCH_EXE=1 # creates a windows executable which depends on the installed aint.dll
+    if [ ${PATCH_EXE} -eq 1 ]; then
+        DLL_PATH=$(cygpath -m ../../../lib/aint.dll)
+        DLL_PATH_MANGLE=$(echo ${DLL_PATH} | sed 's@/@_@g' | sed 's@:@_@')
+        DLL_PATH_DOS=$(echo ${DLL_PATH} | sed 's@/@\\\\@g')
+        echo ${DLL_PATH_MANGLE} | awk -v d=\" '{ print "LIBRARY " d $1 d }' > a.def
+        cat ../../../lib/aint.def >> a.def
+        ${DLLTOOL} --output-lib a.lib --input-def a.def
+        ${CXX} -o a.exe ${SOURCE} -std=c++11 -I ../../../include a.lib -static-libgcc ${CXX_LIB} ${PTH_LIB}
+        cat a.exe | sed "s@${DLL_PATH_MANGLE}@${DLL_PATH_DOS}@" > ${OUTPUT}
+        chmod 755 ${OUTPUT}
+        rm -f a.exe a.lib a.def
+    else
+        ${CXX} -o a.exe ${SOURCE} -std=c++11 -I ../../../include ../../../lib/aint.dll -static-libgcc ${CXX_LIB} ${PTH_LIB}
+        cp ../../../lib/aint.dll ./
+    fi
 }
 
 function build
@@ -43,6 +51,9 @@ function build
     echo "building $biny ... done."
 }
 
-build example.cxx  
+for cxx in $(ls *.cxx)
+do
+    build ${cxx}
+done  
 
 # eof
