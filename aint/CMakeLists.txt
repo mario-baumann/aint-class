@@ -64,13 +64,14 @@ include_directories(
     "${CMAKE_CURRENT_SOURCE_DIR}/impl/include"
 )
 
-
 add_library(aint SHARED ${Sources})
 if(MINGW)
     set_target_properties(aint PROPERTIES PREFIX "" IMPORT_PREFIX "" LINK_FLAGS "${CMAKE_CURRENT_SOURCE_DIR}/aint_export_mingw.def -Wl,--output-def=aint.def")
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/aint.def DESTINATION lib)
 elseif(UNIX AND NOT APPLE)
     set_target_properties(aint PROPERTIES LINK_FLAGS "-Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/aint_export_linux.txt")
+elseif(UNIX AND APPLE)
+    set_target_properties(aint PROPERTIES LINK_FLAGS "-Wl,-exported_symbols_list,${CMAKE_CURRENT_SOURCE_DIR}/aint_export_darwin.txt")
 endif()
 if(NOT "${TARGET_LIBS}" STREQUAL "")
     target_link_libraries(aint ${TARGET_LIBS})
