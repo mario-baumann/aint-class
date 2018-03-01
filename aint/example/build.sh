@@ -24,7 +24,7 @@ function build_mingw
         chmod 755 ${OUTPUT}
         rm -f a.exe a.lib a.def
     else
-        ${CXX} -o a.exe ${SOURCE} -std=c++11 -I ../../../include ../../../lib/aint.dll -static-libgcc ${CXX_LIB} ${PTH_LIB}
+        ${CXX} -o ${OUTPUT} ${SOURCE} -std=c++11 -I ../../../include ../../../lib/aint.dll -static-libgcc ${CXX_LIB} ${PTH_LIB}
         cp ../../../lib/aint.dll ./
     fi
 }
