@@ -31,6 +31,18 @@ project(aint CXX)
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMakeModules)
 
+if(MINGW)
+    if(${CMAKE_CXX_COMPILER} MATCHES "i686")
+        set(AINT_SYSTEM "MINGW32")
+    else()
+        set(AINT_SYSTEM "MINGW64")
+    endif()
+elseif(UNIX AND APPLE)
+    set(AINT_SYSTEM "APPLE")
+elseif(UNIX AND NOT APPLE)
+    set(AINT_SYSTEM "LINUX")
+endif()
+
 add_subdirectory(aint)
 
 # add a target to generate API documentation with Doxygen 

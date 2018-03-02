@@ -66,16 +66,33 @@ include_directories(
 
 add_library(aint SHARED ${Sources})
 if(MINGW)
-    set_target_properties(aint PROPERTIES PREFIX "" IMPORT_PREFIX "" LINK_FLAGS "${CMAKE_CURRENT_SOURCE_DIR}/aint_export_mingw.def -Wl,--output-def=aint.def")
+    set_target_properties(aint PROPERTIES PREFIX "" IMPORT_PREFIX "" LINK_FLAGS "${CMAKE_CURRENT_BINARY_DIR}/aint_export.def -Wl,--output-def=aint.def")
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/aint.def DESTINATION lib)
+    set(NM "")
 elseif(UNIX AND NOT APPLE)
-    set_target_properties(aint PROPERTIES LINK_FLAGS "-Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/aint_export_linux.txt")
+    set_target_properties(aint PROPERTIES LINK_FLAGS "-Wl,--version-script=${CMAKE_CURRENT_BINARY_DIR}/aint_export.def")
+    set(NM "nm")
 elseif(UNIX AND APPLE)
-    set_target_properties(aint PROPERTIES LINK_FLAGS "-Wl,-exported_symbols_list,${CMAKE_CURRENT_SOURCE_DIR}/aint_export_darwin.txt")
+    set_target_properties(aint PROPERTIES LINK_FLAGS "-Wl,-exported_symbols_list,${CMAKE_CURRENT_BINARY_DIR}/aint_export.def")
+    set(NM "nm")
 endif()
 if(NOT "${TARGET_LIBS}" STREQUAL "")
     target_link_libraries(aint ${TARGET_LIBS})
 endif()
+add_custom_command(
+    TARGET aint
+    PRE_LINK
+ #  COMMAND ${NM} ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/aint.dir/*.o > ${CMAKE_CURRENT_BINARY_DIR}/aint_export.nm
+    COMMAND ${CMAKE_COMMAND}
+        -D SYSTEM=${AINT_SYSTEM}
+        -D OBJECT_DIR=${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/aint.dir
+        -D NM_COMMAND=${CMAKE_NM}
+        -D NM_FILE=${CMAKE_CURRENT_BINARY_DIR}/aint_export.nm
+        -D DEF_FILE=${CMAKE_CURRENT_BINARY_DIR}/aint_export.def
+        -P ${CMAKE_SOURCE_DIR}/cmake/gen_def_file.cmake
+    COMMENT "Generating aint_export.def"
+    VERBATIM
+)
 set_target_properties(aint PROPERTIES PUBLIC_HEADER "include/aint.hxx")
 install(TARGETS aint DESTINATION lib PUBLIC_HEADER DESTINATION include)
 

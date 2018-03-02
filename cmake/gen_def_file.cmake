@@ -1,0 +1,91 @@
+#
+# gen_def_file.cmake
+#
+# generates export list 
+
+cmake_policy(SET CMP0054 NEW)
+
+if("${SYSTEM}" STREQUAL "LINUX")
+    file(GLOB OBJECTS ${OBJECT_DIR}/*.cxx.o)
+    execute_process(
+        COMMAND ${NM_COMMAND} ${OBJECTS}
+        OUTPUT_FILE ${NM_FILE}
+    )   
+    file(STRINGS ${NM_FILE} LINES)
+    foreach(JL ${LINES})
+        if(${JL} MATCHES "^[0-9a-fA-F]+[ \t]+T[ \t]+(.+)$")
+            string(REGEX REPLACE "^[0-9a-fA-F]+[ \t]+T[ \t]+(.+)$" "\\1" JL ${JL})
+            if(${JL} MATCHES "aint" OR ${JL} MATCHES "alit") 
+                list( FIND MANGLES ${JL} RES )
+                if( ${RES} LESS 0 )
+                    list(APPEND MANGLES ${JL})
+                endif()
+            endif()
+        endif()
+    endforeach(JL)
+    list(SORT MANGLES)
+    file(WRITE  ${DEF_FILE} "# export symbols for ${SYSTEM}\n" )
+    file(APPEND ${DEF_FILE} "{\n" )
+    file(APPEND ${DEF_FILE} "  global:\n" )
+    foreach(JM ${MANGLES})
+        file(APPEND ${DEF_FILE} "    ${JM};\n" )
+    endforeach(JM)
+    file(APPEND ${DEF_FILE} "  local:\n" )
+    file(APPEND ${DEF_FILE} "    *;\n" )
+    file(APPEND ${DEF_FILE} "};\n" )
+elseif("${SYSTEM}" MATCHES "^MINGW")
+    file(GLOB OBJECTS ${OBJECT_DIR}/*.cxx.obj)
+    execute_process(
+        COMMAND ${NM_COMMAND} ${OBJECTS}
+        OUTPUT_FILE ${NM_FILE}
+    )   
+    file(STRINGS ${NM_FILE} LINES)
+    foreach(JL ${LINES})
+        if(${JL} MATCHES "^[0-9a-fA-F]+[ \t]+T[ \t]+_(.+)$")
+            if("${SYSTEM}" STREQUAL "MINGW64")
+                string(REGEX REPLACE "^[0-9a-fA-F]+[ \t]+T[ \t]+(.+)$" "\\1" JL ${JL})
+            else()
+                string(REGEX REPLACE "^[0-9a-fA-F]+[ \t]+T[ \t]+_(.+)$" "\\1" JL ${JL})
+            endif()
+            if(${JL} MATCHES "aint" OR ${JL} MATCHES "alit") 
+                list( FIND MANGLES ${JL} RES )
+                if( ${RES} LESS 0 )
+                    list(APPEND MANGLES ${JL})
+                endif()
+            endif()
+        endif()
+    endforeach(JL)
+    list(SORT MANGLES)
+    file(WRITE  ${DEF_FILE} "; export symbols for ${SYSTEM}\n" )
+    file(APPEND ${DEF_FILE} "EXPORTS\n" )
+    foreach(JM ${MANGLES})
+        file(APPEND ${DEF_FILE} "  ${JM}\n" )
+    endforeach(JM)
+elseif("${SYSTEM}" STREQUAL "APPLE")
+    file(GLOB OBJECTS ${OBJECT_DIR}/*.cxx.o)
+    execute_process(
+        COMMAND ${NM_COMMAND} ${OBJECTS}
+        OUTPUT_FILE ${NM_FILE}
+    )   
+    file(STRINGS ${NM_FILE} LINES)
+    foreach(JL ${LINES})
+        if(${JL} MATCHES "^[0-9a-fA-F]+[ \t]+T[ \t]+(.+)$")
+            string(REGEX REPLACE "^[0-9a-fA-F]+[ \t]+T[ \t]+(.+)$" "\\1" JL ${JL})
+            if(${JL} MATCHES "aint" OR ${JL} MATCHES "alit") 
+                list( FIND MANGLES ${JL} RES )
+                if( ${RES} LESS 0 )
+                    list(APPEND MANGLES ${JL})
+                endif()
+            endif()
+        endif()
+    endforeach(JL)
+    list(SORT MANGLES)
+    file(WRITE ${DEF_FILE} "# export symbols for ${SYSTEM}\n" )
+    foreach(JM ${MANGLES})
+        file(APPEND ${DEF_FILE} "${JM}\n" )
+    endforeach(JM)
+else()
+    message( FATAL_ERROR "Invalid SYSTEM: ${SYSTEM}" )
+endif()
+
+# eof
