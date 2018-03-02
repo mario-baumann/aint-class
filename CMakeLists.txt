@@ -29,7 +29,7 @@ cmake_minimum_required (VERSION 3.0)
 
 project(aint CXX)
 
-set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMakeModules)
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 if(MINGW)
     if(${CMAKE_CXX_COMPILER} MATCHES "i686")

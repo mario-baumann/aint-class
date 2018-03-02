@@ -90,7 +90,7 @@ _CYGWIN*)
     if [ "$ARCH" -eq 32 ]; then
         TARGET_TRIPLE="i686-w64-mingw32"
     fi
-    TOOLCHAIN="-D CMAKE_TOOLCHAIN_FILE=${SOURCE_DIR}/CMakeModules/Toolchain-${TARGET_TRIPLE}.cmake"
+    TOOLCHAIN="-D CMAKE_TOOLCHAIN_FILE=${SOURCE_DIR}/cmake/Toolchain-${TARGET_TRIPLE}.cmake"
     ;;
 esac
 
