@@ -56,14 +56,14 @@ namespace client {
         };
         void do_int(std::vector<char> s) {
             s.push_back('\0');
-	    astd::aint a(std::string(s.data()));
+            astd::aint a(std::string(s.data()));
             stck.push(a);
             if (dbg) {
-		std::cout << __FUNCTION__ << ": " << stck.top() << " integer" << std::endl;
+                std::cout << __FUNCTION__ << ": " << stck.top() << " integer" << std::endl;
             }
         }
         void do_op1(opType op) {
-	    astd::aint a1 = stck.top(); stck.pop();
+            astd::aint a1 = stck.top(); stck.pop();
             switch (op) {
             default:
             case PLUS: stck.push(+a1); break;
@@ -72,7 +72,7 @@ namespace client {
             case DIGITS: stck.push(a1.digits()); break;
             }
             if (dbg) {
-		std::cout << __FUNCTION__ << ": " << stck.top() << " ( " << op << a1 << ")" << std::endl;
+                std::cout << __FUNCTION__ << ": " << stck.top() << " ( " << op << a1 << ")" << std::endl;
             }
         }
         void do_pos() { do_op1(PLUS); }
@@ -80,8 +80,8 @@ namespace client {
         void do_fac() { do_op1(FACTORIAL); }
         void do_dig() { do_op1(DIGITS); }
         void do_op2(opType op) {
-	    astd::aint a2 = stck.top(); stck.pop();
-	    astd::aint a1 = stck.top(); stck.pop();
+            astd::aint a2 = stck.top(); stck.pop();
+            astd::aint a1 = stck.top(); stck.pop();
             switch (op) {
             default:
             case PLUS: stck.push(a1 + a2); break;
@@ -93,7 +93,7 @@ namespace client {
             case POWER_TOWER: stck.push(a1.powertower(a2)); break;
             }
             if (dbg) {
-		std::cout << __FUNCTION__ << ": " << stck.top() << " ( " << a1 << " " << op << " " << a2 << " ) " << std::endl;
+                std::cout << __FUNCTION__ << ": " << stck.top() << " ( " << a1 << " " << op << " " << a2 << " ) " << std::endl;
             }
         }
         void do_add() { do_op2(PLUS); }
@@ -112,27 +112,30 @@ namespace client {
             qi::digit_type digit_;
 
             expression =
-                term >> *( ('+' >> term   [&do_add]) |
-                           ('-' >> term   [&do_sub]) )
+                term >> 
+                *( ('+' >> term [&do_add]) |
+                   ('-' >> term [&do_sub]) )
                 ;
 
             term =
-                factor >> *( ('*' >> factor [&do_mul]) |
-                             ('/' >> factor [&do_div]) |
-                             ('%' >> factor [&do_mod]) )
+                factor >> 
+                *( ('*' >> factor [&do_mul]) |
+                   ('/' >> factor [&do_div]) |
+                   ('%' >> factor [&do_mod]) )
                 ;
 
             factor =
-                primary >> -( ("^^" >> factor [&do_ptw]) | 
-                              ('^'  >> factor [&do_pow]) )
+                primary >> 
+                -( ("^^" >> factor [&do_ptw]) | 
+                   ('^'  >> factor [&do_pow]) )
                 ;
 
             primary =
-                (+digit_) [&do_int]         |
-                '(' >> expression >> ')'    |
-                ('+' >> primary [&do_pos])  |
-                ('-' >> primary [&do_neg])  |
-                ('!' >> primary [&do_fac])  |
+                (+digit_) [&do_int]        |
+                '(' >> expression >> ')'   |
+                ('+' >> primary [&do_pos]) |
+                ('-' >> primary [&do_neg]) |
+                ('!' >> primary [&do_fac]) |
                 ('#' >> primary [&do_dig])
                 ;
 
